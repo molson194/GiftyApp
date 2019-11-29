@@ -10,47 +10,66 @@ import SwiftUI
 
 struct WelcomeView: View {
     var body: some View {
+        
         NavigationView {
-            VStack {
-                Image("Gift")
-                .resizable()
-                .aspectRatio(contentMode: ContentMode.fit)
-                .frame(width: 150.0, height: 150.0)
-                .padding(Edge.Set.bottom, 20)
+            
+            
+            ZStack {
+
+                //Background Color
+                Color(red: 209/255, green: 166/255, blue: 255/255)
+                .edgesIgnoringSafeArea(.vertical) // Ignore just for the color
                 
-                Text("Welcome to Gifty").bold().font(.title)
-                
-                Text("Send and recieve gifts with all your friends")
-                .font(.subheadline)
-                .padding(EdgeInsets(top: 10, leading: 0, bottom: 70, trailing: 0))
-                
-                NavigationLink(destination: SignupView()) {
-                    HStack(alignment: .center) {
-                        Spacer()
-                        Text("Sign up").foregroundColor(Color.black)
-                        Spacer()
+                VStack {
+                    
+                    // Logo
+                    Spacer()
+                    Text("🎁💝")
+                        .bold()
+                        .font(.system(size: 100))
+                    Text("💝🥳")
+                    .bold()
+                    .font(.system(size: 100))
+                    
+                    Text("gifty")
+                        .fontWeight(.semibold)
+                        .bold()
+                        .font(.system(size: 60))
+                        .foregroundColor(Color.white)
+                        .padding(.bottom, 15.0)
+                   
+                    // Buttons
+                    HStack{
+
+                        // Sign Up
+                        NavigationLink(destination: SignupView()) {
+                            Text("sign up!")
+                                .font(.headline)
+                                .padding()
+                                .foregroundColor(Color(red: 209/255, green: 166/255, blue: 255/255, opacity: 1.0))
+                        }
+                            .background(Color(red: 1, green: 1, blue: 1, opacity: 0.95))
+                            .cornerRadius(8)
+                            .padding([.top, .leading, .bottom])
+                        
+                        // Log In
+                        NavigationLink(destination: LoginView()) {
+                            Text("I have an account :)")
+                                .font(.headline)
+                                .padding()
+                                .foregroundColor(Color.white)
+                        }
+                            .background(Color(red: 1, green: 1, blue: 1, opacity: 0.2))
+                            .cornerRadius(8)
+                            .padding([.top, .bottom, .trailing])
+                            
                     }
-                                    
+                    
+                    Spacer()
+                    Spacer()
+                                       
                 }
-                .padding()
-                .background(Color(red: 211/255, green: 190/255, blue: 254/255))
-                .cornerRadius(6.0)
-                
-                Spacer().frame(width: 0, height: 10, alignment: .center)
-                
-                NavigationLink(destination: LoginView()) {
-                    HStack(alignment: .center) {
-                        Spacer()
-                        Text("Login").foregroundColor(Color.black)
-                        Spacer()
-                    }
-                                    
-                }
-                .padding()
-                .border(Color(red: 211/255, green: 190/255, blue: 254/255), width: 3)
-                .cornerRadius(6.0)
-                                      
-            }.padding()
+            }
         }
     }
 }
