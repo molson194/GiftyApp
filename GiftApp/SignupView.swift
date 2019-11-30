@@ -26,10 +26,10 @@ struct SignupView : View {
                         TextField("Phone Number", text: $phone).padding().background(Color.white).cornerRadius(4.0)
                         TextField("Password", text: $password).padding().background(Color.white).cornerRadius(4.0)
                         
-                        NavigationLink(destination: ContentView()) {
+                        NavigationLink(destination: VerifyPhoneView()) {
                             HStack(alignment: .center) {
                                 Spacer()
-                                Text("Create Account").foregroundColor(Color.black)
+                                Text("Send Verification Code").foregroundColor(Color.black)
                                 Spacer()
                             }
                         }
