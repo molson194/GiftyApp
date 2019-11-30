@@ -28,9 +28,8 @@ struct WelcomeView: View {
                         .bold()
                         .font(.system(size: 100))
                     Text("💝🥳")
-                    .bold()
-                    .font(.system(size: 100))
-                    
+                        .bold()
+                        .font(.system(size: 100))
                     Text("gifty")
                         .fontWeight(.semibold)
                         .bold()
