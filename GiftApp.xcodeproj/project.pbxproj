@@ -62,18 +62,42 @@
 		F02218C123595BA90097F5BB /* GiftApp */ = {
 			isa = PBXGroup;
 			children = (
+				F0BCE74C2392325800A851C3 /* Controllers */,
+				F0BCE74B2392324F00A851C3 /* Models */,
+				F0BCE74A2392324300A851C3 /* Views */,
 				F02218C223595BA90097F5BB /* AppDelegate.swift */,
 				F02218C423595BA90097F5BB /* SceneDelegate.swift */,
-				F02218C623595BAA0097F5BB /* ContentView.swift */,
 				F02218C823595BAD0097F5BB /* Assets.xcassets */,
 				F02218CD23595BAD0097F5BB /* LaunchScreen.storyboard */,
 				F02218D023595BAD0097F5BB /* Info.plist */,
+			);
+			path = GiftApp;
+			sourceTree = "<group>";
+		};
+		F0BCE74A2392324300A851C3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F02218C623595BAA0097F5BB /* ContentView.swift */,
 				F02218D623595DC70097F5BB /* SignupView.swift */,
 				F03597312390AC72008EF87C /* WelcomeView.swift */,
 				F03597332390BFA3008EF87C /* LoginView.swift */,
 				F0BCE7482392282000A851C3 /* VerifyPhoneView.swift */,
 			);
-			path = GiftApp;
+			path = Views;
+			sourceTree = "<group>";
+		};
+		F0BCE74B2392324F00A851C3 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		F0BCE74C2392325800A851C3 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
