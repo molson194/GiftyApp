@@ -17,48 +17,66 @@ struct VerifyPhoneView: View {
         
         
             ZStack {
-
-                //Background Color
-                Color(red: 209/255, green: 166/255, blue: 255/255)
-                .edgesIgnoringSafeArea(.vertical) // Ignore just for the color
+            // Background Color
+            Color(red: 209/255, green: 166/255, blue: 255/255)  .edgesIgnoringSafeArea(.vertical)
                 
                 VStack {
-                    TextField("Verification Code", text: $code, onEditingChanged: { _ in
+                    
+                    // Verification Code
+                    HStack{
+                        Text("verification code")
+                        .font(.body)
+                        .fontWeight(.bold)
+                        .foregroundColor(Color.white)
+                        .multilineTextAlignment(.leading)
+                        .padding([.top, .leading])
+                        Spacer()
+                        
+                    }
+                    
+                    TextField("", text: $code, onEditingChanged: { _ in
                         if self.code == "00" {
                             self.goToContent = true
                         }
                     })
-                        .padding()
-                        .background(Color.white)
-                        .cornerRadius(4.0)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                
-                    HStack(alignment: .center) {
-                        Spacer()
-                        Button(action: {
-                            print("resend code")
-                        }) {
-                            Text("Resend Code").foregroundColor(Color.black)
-                        }
-                        Spacer()
-                    }
                     .padding()
-                    .background(Color.blue)
-                    .cornerRadius(4.0)
+                    .background(Color.white)
+                    .cornerRadius(8)
+                    .foregroundColor(Color(red: 209/255, green: 166/255, blue: 255/255, opacity: 1.0))
                     
-                    Spacer().frame(width: 0, height: 10, alignment: .center)
+                    
+                        
+                    // Resend Code
+                    Button(action: {
+                        print("resend code")
+                    }) {
+                        Text("resend code")
+                           .font(.headline)
+                        .foregroundColor(Color(red: 209/255, green: 166/255, blue: 255/255, opacity: 1.0))
+                            .padding()
+                    }
+                    .background(Color(red: 1, green: 1, blue: 1, opacity: 0.95))
+                    .cornerRadius(8)
+                    .padding(.vertical)
+                    
+                    
                     
                     NavigationLink(destination: ContentView(), isActive: $goToContent) {
-                        HStack(alignment: .center) {
-                            Spacer()
-                            Text("Take me to my account").foregroundColor(Color.black)
-                            Spacer()
-                        }
+                        
+                        Text("take me to my account :)")
+                            .font(.headline)
+                            .padding()
+                        .foregroundColor(Color(red: 209/255, green: 166/255, blue: 255/255, opacity: 1.0))
                     }
-                    .padding()
-                    .background(Color.blue)
-                    .cornerRadius(4.0)
-                }
+                    
+                    .background(Color(red: 1, green: 1, blue: 1, opacity: 0.95))
+                    .cornerRadius(8)
+                
+                
+                    
+                    
+                    
+                }.padding(.horizontal, 30.0)
             }
         }
     }

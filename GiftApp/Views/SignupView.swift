@@ -16,30 +16,89 @@ struct SignupView : View {
     var body: some View {
         
         NavigationView {
-            Color(red: 211/255, green: 190/255, blue: 254/255)
-                .edgesIgnoringSafeArea(.vertical) // Ignore just for the color
-                .overlay(
+            
+            ZStack {
+
+                //Background Color
+                Color(red: 209/255, green: 166/255, blue: 255/255)
+                .edgesIgnoringSafeArea(.vertical)
+            
+                VStack {
                     
-                    VStack {
+                    // Name
+                    HStack{
+                        Text("name")
+                        .font(.body)
+                        .fontWeight(.bold)
+                        .foregroundColor(Color.white)
+                        .multilineTextAlignment(.leading)
+                        .padding(.leading)
                         
-                        TextField("Name", text: $name).padding().background(Color.white).cornerRadius(4.0)
-                        TextField("Phone Number", text: $phone).padding().background(Color.white).cornerRadius(4.0)
-                        TextField("Password", text: $password).padding().background(Color.white).cornerRadius(4.0)
-                        
-                        NavigationLink(destination: VerifyPhoneView()) {
-                            HStack(alignment: .center) {
-                                Spacer()
-                                Text("Send Verification Code").foregroundColor(Color.black)
-                                Spacer()
-                            }
-                        }
+                        Spacer()
+                    }
+               
+                    TextField("", text: $name)
                         .padding()
-                        .background(Color.blue)
-                        .cornerRadius(4.0)
+                        .background(Color.white)
+                        .cornerRadius(8)
+                        .foregroundColor(Color(red: 209/255, green: 166/255, blue: 255/255, opacity: 1.0))
+                    
+                    // Phone Number
+                     HStack{
+                         Text("phone number")
+                         .font(.body)
+                         .fontWeight(.bold)
+                         .foregroundColor(Color.white)
+                         .multilineTextAlignment(.leading)
+                         .padding([.top, .leading])
                         
-                    }.padding()
-            )
+                         Spacer()
+                     }
+                
+                     TextField("", text: $phone)
+                         .padding()
+                         .background(Color.white)
+                         .cornerRadius(8)
+                         .foregroundColor(Color(red: 209/255, green: 166/255, blue: 255/255, opacity: 1.0))
+                    
+                    // Password
+                     HStack{
+                         Text("password")
+                         .font(.body)
+                         .fontWeight(.bold)
+                         .foregroundColor(Color.white)
+                         .multilineTextAlignment(.leading)
+                         .padding([.top, .leading])
+                         
+                         Spacer()
+                     }
+                
+                     TextField("", text: $password)
+                         .padding()
+                         .background(Color.white)
+                         .cornerRadius(8)
+                         .foregroundColor(Color(red: 209/255, green: 166/255, blue: 255/255, opacity: 1.0))
+                    
+                    // Submit
+                    NavigationLink(destination: VerifyPhoneView()) {
+                        Text("send verification code")
+                        .font(.headline)
+                        .padding()
+                        .foregroundColor(Color(red: 209/255, green: 166/255, blue: 255/255, opacity: 1.0))
+                    }
+                    .background(Color(red: 1, green: 1, blue: 1, opacity: 0.95))
+                    .cornerRadius(8)
+                    .padding(.vertical)
+                    
+                
+                }.padding(.horizontal, 30.0)
+            }
         }
     }
-    
+}
+
+struct SignupView_Previews: PreviewProvider {
+    static var previews: some View {
+        SignupView()
+    }
 }

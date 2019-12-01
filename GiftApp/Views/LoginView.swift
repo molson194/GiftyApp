@@ -29,7 +29,8 @@ struct LoginView: View {
                         .font(.body)
                         .fontWeight(.bold)
                         .foregroundColor(Color.white)
-                        .multilineTextAlignment(.leading).padding(.leading)
+                        .multilineTextAlignment(.leading)
+                        .padding(.leading)
                         Spacer()
                     }
                     
@@ -45,7 +46,8 @@ struct LoginView: View {
                         .font(.body)
                         .fontWeight(.bold)
                         .foregroundColor(Color.white)
-                        .multilineTextAlignment(.leading).padding([.top, .leading])
+                        .multilineTextAlignment(.leading)
+                        .padding([.top, .leading])
                         Spacer()
                         
                     }
@@ -65,7 +67,7 @@ struct LoginView: View {
                     }
                     .background(Color(red: 1, green: 1, blue: 1, opacity: 0.95))
                     .cornerRadius(8)
-                    .padding([.top, .leading, .bottom])
+                    .padding(.vertical)
                     
                 }.padding(.horizontal, 30.0)
             }

@@ -13,12 +13,11 @@ struct WelcomeView: View {
         
         NavigationView {
             
-            
             ZStack {
 
                 //Background Color
                 Color(red: 209/255, green: 166/255, blue: 255/255)
-                .edgesIgnoringSafeArea(.vertical) // Ignore just for the color
+                .edgesIgnoringSafeArea(.vertical)
                 
                 VStack {
                     
