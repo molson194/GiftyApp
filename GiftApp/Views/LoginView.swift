@@ -14,8 +14,6 @@ struct LoginView: View {
     
     var body: some View {
         
-        NavigationView {
-            
             ZStack {
                 // Background Color
                 Color(red: 209/255, green: 166/255, blue: 255/255)  .edgesIgnoringSafeArea(.vertical)
@@ -70,7 +68,6 @@ struct LoginView: View {
                     .padding(.vertical)
                     
                 }.padding(.horizontal, 30.0)
-            }
         }
     }
 }

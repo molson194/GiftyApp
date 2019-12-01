@@ -15,7 +15,6 @@ struct SignupView : View {
     
     var body: some View {
         
-        NavigationView {
             
             ZStack {
 
@@ -94,7 +93,6 @@ struct SignupView : View {
                 }.padding(.horizontal, 30.0)
             }
         }
-    }
 }
 
 struct SignupView_Previews: PreviewProvider {

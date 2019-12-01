@@ -13,7 +13,7 @@ struct VerifyPhoneView: View {
     @State var goToContent = false
     
     var body: some View {
-        NavigationView {
+
         
         
             ZStack {
@@ -80,7 +80,7 @@ struct VerifyPhoneView: View {
             }
         }
     }
-}
+
 
 struct VerifyPhoneView_Previews: PreviewProvider {
     static var previews: some View {
