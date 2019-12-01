@@ -12,48 +12,54 @@ struct ContentView: View {
     @State private var selection = 0
  
     var body: some View {
+        
         TabView(selection: $selection){
-            Text("Coming Soon")
-                .font(.title)
+            
+            // Promos
+            PromosView()
                 .tabItem {
                     VStack {
-                        Image("first")
+                        Image("promos")
                         Text("Promos")
                     }
                 }
                 .tag(0)
-            Text("Coming Soon")
-                .font(.title)
+            
+            // Feed
+            FeedView()
                 .tabItem {
                     VStack {
-                        Image("second")
+                        Image("feed")
                         Text("Feed")
                     }
                 }
                 .tag(1)
-            Text("Coming Soon")
-                .font(.title)
+            
+            // Send
+            SendView()
                 .tabItem {
                     VStack {
-                        Image("first")
+                        Image("send")
                         Text("Send")
                     }
                 }
                 .tag(2)
-            Text("Coming Soon")
-                .font(.title)
+            
+            // Basket
+            BasketView()
                 .tabItem {
                     VStack {
-                        Image("second")
+                        Image("basket")
                         Text("Basket")
                     }
                 }
                 .tag(3)
-            Text("Coming Soon")
-                .font(.title)
+            
+            // Profile
+            ProfileView()
                 .tabItem {
                     VStack {
-                        Image("first")
+                        Image("profile")
                         Text("Profile")
                     }
                 }

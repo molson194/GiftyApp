@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CB9B5A61239375CD009043F2 /* PromosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9B5A60239375CD009043F2 /* PromosView.swift */; };
+		CB9B5A6323937856009043F2 /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9B5A6223937856009043F2 /* FeedView.swift */; };
+		CB9B5A6523937886009043F2 /* SendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9B5A6423937886009043F2 /* SendView.swift */; };
+		CB9B5A6723937896009043F2 /* BasketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9B5A6623937896009043F2 /* BasketView.swift */; };
+		CB9B5A69239378A6009043F2 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9B5A68239378A6009043F2 /* ProfileView.swift */; };
 		F02218C323595BA90097F5BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02218C223595BA90097F5BB /* AppDelegate.swift */; };
 		F02218C523595BA90097F5BB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02218C423595BA90097F5BB /* SceneDelegate.swift */; };
 		F02218C723595BAA0097F5BB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02218C623595BAA0097F5BB /* ContentView.swift */; };
@@ -19,6 +24,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CB9B5A60239375CD009043F2 /* PromosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromosView.swift; sourceTree = "<group>"; };
+		CB9B5A6223937856009043F2 /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
+		CB9B5A6423937886009043F2 /* SendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendView.swift; sourceTree = "<group>"; };
+		CB9B5A6623937896009043F2 /* BasketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketView.swift; sourceTree = "<group>"; };
+		CB9B5A68239378A6009043F2 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		F02218BF23595BA90097F5BB /* GiftApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GiftApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F02218C223595BA90097F5BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F02218C423595BA90097F5BB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -78,7 +88,12 @@
 			isa = PBXGroup;
 			children = (
 				F02218C623595BAA0097F5BB /* ContentView.swift */,
+				CB9B5A6423937886009043F2 /* SendView.swift */,
+				CB9B5A6623937896009043F2 /* BasketView.swift */,
+				CB9B5A68239378A6009043F2 /* ProfileView.swift */,
 				F02218D623595DC70097F5BB /* SignupView.swift */,
+				CB9B5A60239375CD009043F2 /* PromosView.swift */,
+				CB9B5A6223937856009043F2 /* FeedView.swift */,
 				F03597312390AC72008EF87C /* WelcomeView.swift */,
 				F03597332390BFA3008EF87C /* LoginView.swift */,
 				F0BCE7482392282000A851C3 /* VerifyPhoneView.swift */,
@@ -171,12 +186,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB9B5A6723937896009043F2 /* BasketView.swift in Sources */,
 				F03597342390BFA3008EF87C /* LoginView.swift in Sources */,
+				CB9B5A6323937856009043F2 /* FeedView.swift in Sources */,
 				F03597322390AC72008EF87C /* WelcomeView.swift in Sources */,
+				CB9B5A69239378A6009043F2 /* ProfileView.swift in Sources */,
 				F02218C323595BA90097F5BB /* AppDelegate.swift in Sources */,
 				F02218C523595BA90097F5BB /* SceneDelegate.swift in Sources */,
 				F02218D723595DC70097F5BB /* SignupView.swift in Sources */,
 				F0BCE7492392282000A851C3 /* VerifyPhoneView.swift in Sources */,
+				CB9B5A61239375CD009043F2 /* PromosView.swift in Sources */,
+				CB9B5A6523937886009043F2 /* SendView.swift in Sources */,
 				F02218C723595BAA0097F5BB /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
