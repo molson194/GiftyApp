@@ -22,6 +22,8 @@
 		F03597322390AC72008EF87C /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03597312390AC72008EF87C /* WelcomeView.swift */; };
 		F03597342390BFA3008EF87C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03597332390BFA3008EF87C /* LoginView.swift */; };
 		F0BCE7492392282000A851C3 /* VerifyPhoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0BCE7482392282000A851C3 /* VerifyPhoneView.swift */; };
+		F0FDD79F239E0D5500E1233A /* BankTransferView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FDD79E239E0D5500E1233A /* BankTransferView.swift */; };
+		F0FDD7A1239E0D9100E1233A /* CardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FDD7A0239E0D9100E1233A /* CardsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +44,8 @@
 		F03597312390AC72008EF87C /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		F03597332390BFA3008EF87C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		F0BCE7482392282000A851C3 /* VerifyPhoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyPhoneView.swift; sourceTree = "<group>"; };
+		F0FDD79E239E0D5500E1233A /* BankTransferView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankTransferView.swift; sourceTree = "<group>"; };
+		F0FDD7A0239E0D9100E1233A /* CardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +104,8 @@
 				F03597332390BFA3008EF87C /* LoginView.swift */,
 				F0BCE7482392282000A851C3 /* VerifyPhoneView.swift */,
 				F0358744239DA81800989704 /* GiftView.swift */,
+				F0FDD79E239E0D5500E1233A /* BankTransferView.swift */,
+				F0FDD7A0239E0D9100E1233A /* CardsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -195,9 +201,11 @@
 				F03597322390AC72008EF87C /* WelcomeView.swift in Sources */,
 				CB9B5A69239378A6009043F2 /* ProfileView.swift in Sources */,
 				F02218C323595BA90097F5BB /* AppDelegate.swift in Sources */,
+				F0FDD7A1239E0D9100E1233A /* CardsView.swift in Sources */,
 				F02218C523595BA90097F5BB /* SceneDelegate.swift in Sources */,
 				F02218D723595DC70097F5BB /* SignupView.swift in Sources */,
 				F0BCE7492392282000A851C3 /* VerifyPhoneView.swift in Sources */,
+				F0FDD79F239E0D5500E1233A /* BankTransferView.swift in Sources */,
 				CB9B5A61239375CD009043F2 /* PromosView.swift in Sources */,
 				F0358745239DA81800989704 /* GiftView.swift in Sources */,
 				CB9B5A6523937886009043F2 /* SendView.swift in Sources */,
