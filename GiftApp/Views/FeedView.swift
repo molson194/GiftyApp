@@ -10,10 +10,8 @@ import SwiftUI
 
 struct FeedView: View {
     var body: some View {
-        NavigationView {
-            Text("More to come.")
-                .navigationBarTitle(Text("Feed"))
-        }
+        Text("More to come.")
+            .navigationBarTitle(Text("Feed"))
     }
 }
 

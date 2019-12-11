@@ -10,10 +10,8 @@ import SwiftUI
 
 struct SendView: View {
     var body: some View {
-        NavigationView {
-            Text("More to come.")
-                .navigationBarTitle(Text("Send"))
-        }
+        Text("More to come.")
+            .navigationBarTitle(Text("Send"))
     }
 }
 

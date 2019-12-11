@@ -10,10 +10,8 @@ import SwiftUI
 
 struct PromosView: View {
     var body: some View {
-        NavigationView {
-            Text("More to come.")
-                .navigationBarTitle(Text("Promos"))
-        }
+        Text("More to come.")
+            .navigationBarTitle(Text("Promos"))
     }
 }
 

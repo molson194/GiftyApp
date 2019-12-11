@@ -12,6 +12,7 @@
 		CB9B5A6523937886009043F2 /* SendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9B5A6423937886009043F2 /* SendView.swift */; };
 		CB9B5A6723937896009043F2 /* BasketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9B5A6623937896009043F2 /* BasketView.swift */; };
 		CB9B5A69239378A6009043F2 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9B5A68239378A6009043F2 /* ProfileView.swift */; };
+		F00FEF8F23A0B12C00A8D6BF /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00FEF8E23A0B12C00A8D6BF /* RootView.swift */; };
 		F02218C323595BA90097F5BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02218C223595BA90097F5BB /* AppDelegate.swift */; };
 		F02218C523595BA90097F5BB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02218C423595BA90097F5BB /* SceneDelegate.swift */; };
 		F02218C723595BAA0097F5BB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02218C623595BAA0097F5BB /* ContentView.swift */; };
@@ -34,6 +35,7 @@
 		CB9B5A6423937886009043F2 /* SendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendView.swift; sourceTree = "<group>"; };
 		CB9B5A6623937896009043F2 /* BasketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketView.swift; sourceTree = "<group>"; };
 		CB9B5A68239378A6009043F2 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		F00FEF8E23A0B12C00A8D6BF /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		F02218BF23595BA90097F5BB /* GiftApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GiftApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F02218C223595BA90097F5BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F02218C423595BA90097F5BB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				F0FDD7A0239E0D9100E1233A /* CardsView.swift */,
 				F0A2185F239F6C67005591B4 /* AddCardView.swift */,
 				F0A21861239F7307005591B4 /* CardView.swift */,
+				F00FEF8E23A0B12C00A8D6BF /* RootView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -215,6 +218,7 @@
 				F0FDD79F239E0D5500E1233A /* BankTransferView.swift in Sources */,
 				CB9B5A61239375CD009043F2 /* PromosView.swift in Sources */,
 				F0358745239DA81800989704 /* GiftView.swift in Sources */,
+				F00FEF8F23A0B12C00A8D6BF /* RootView.swift in Sources */,
 				CB9B5A6523937886009043F2 /* SendView.swift in Sources */,
 				F0A21862239F7307005591B4 /* CardView.swift in Sources */,
 				F02218C723595BAA0097F5BB /* ContentView.swift in Sources */,

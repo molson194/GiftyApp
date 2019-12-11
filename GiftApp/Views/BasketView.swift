@@ -10,17 +10,14 @@ import SwiftUI
 
 struct BasketView: View {
     var body: some View {
-        NavigationView {
-            
-            List {
-                VStack {
-                    ForEach(1...5, id: \.self) {_ in
-                        GiftView()
-                    }
+        List {
+            VStack {
+                ForEach(1...5, id: \.self) {_ in
+                    GiftView()
                 }
             }
-        .navigationBarTitle(Text("Basket"))
         }
+        .navigationBarTitle(Text("Basket"))
     }
 }
 
