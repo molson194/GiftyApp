@@ -9,8 +9,47 @@
 import SwiftUI
 
 struct AddCardView: View {
+    @State private var number: String = ""
+    @State private var expiration: String = ""
+    @State private var securityCode: String = ""
+    @State private var zipCode: String = ""
+    
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            TextField("Card Number", text: $number)
+                .keyboardType(.numberPad)
+                .padding()
+            
+            HStack {
+                TextField("Expiration", text: $expiration).keyboardType(.numberPad)
+                Spacer()
+                TextField("Security Code", text: $expiration).keyboardType(.numberPad)
+            }
+            .padding()
+            
+            TextField("Zip Code", text: $expiration)
+                .keyboardType(.numberPad)
+                .padding()
+            
+            HStack {
+                Spacer()
+                NavigationLink(destination: CardsView()) {
+                        Text("Add Card")
+                          .fontWeight(.bold)
+                          .font(.headline)
+                          .padding()
+                }
+                Spacer()
+            }
+            .background(Color.purple)
+            .cornerRadius(40)
+            .foregroundColor(.white)
+            
+            Spacer()
+            
+        }
+        .padding()
     }
 }
 
