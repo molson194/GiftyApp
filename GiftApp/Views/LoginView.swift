@@ -74,7 +74,7 @@ struct LoginView: View {
                 }.padding(.horizontal, 30.0)
         }
     }
-    
+    // TODO: Make sure phone number is verified before going to next screen!
     func login() {
         let userPoolId:String = "GiftApp"
         let pool = AWSCognitoIdentityUserPool(forKey: userPoolId)
