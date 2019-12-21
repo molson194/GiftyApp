@@ -7,10 +7,12 @@
 //
 
 import SwiftUI
+import AWSCognitoIdentityProvider
 
 struct LoginView: View {
-    @State var email: String = ""
+    @State var phone: String = ""
     @State var password: String = ""
+    @State var loginSuccessful = false
     
     var body: some View {
         
@@ -32,7 +34,7 @@ struct LoginView: View {
                         Spacer()
                     }
                     
-                    TextField("", text: $email)
+                    TextField("", text: $phone)
                     .padding()
                     .background(Color.white)
                     .cornerRadius(8)
@@ -57,17 +59,31 @@ struct LoginView: View {
                     .foregroundColor(Color(red: 209/255, green: 166/255, blue: 255/255, opacity: 1.0))
                     
                     // Sign in
-                    NavigationLink(destination: ContentView()) {
-                        Text("sign in :)")
-                        .font(.headline)
-                        .padding()
-                        .foregroundColor(Color(red: 209/255, green: 166/255, blue: 255/255, opacity: 1.0))
+                    NavigationLink(destination: ContentView(), isActive: self.$loginSuccessful) {
+                        Button(action: login) {
+                            Text("sign in :)")
+                            .font(.headline)
+                            .padding()
+                            .foregroundColor(Color(red: 209/255, green: 166/255, blue: 255/255, opacity: 1.0))
+                        }
+                        .background(Color(red: 1, green: 1, blue: 1, opacity: 0.95))
+                        .cornerRadius(8)
+                        .padding(.vertical)
                     }
-                    .background(Color(red: 1, green: 1, blue: 1, opacity: 0.95))
-                    .cornerRadius(8)
-                    .padding(.vertical)
                     
                 }.padding(.horizontal, 30.0)
+        }
+    }
+    
+    func login() {
+        let userPoolId:String = "GiftApp"
+        let pool = AWSCognitoIdentityUserPool(forKey: userPoolId)
+        let user = pool.getUser(phone)
+        user.getSession(phone, password: password, validationData: nil).continueOnSuccessWith { (task) -> () in
+            print("user session is: \(String(describing: task.result))")
+            print(user.username!)
+            print(user.confirmedStatus)
+            self.loginSuccessful = user.isSignedIn
         }
     }
 }

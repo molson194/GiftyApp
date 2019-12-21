@@ -8,19 +8,41 @@
 
 import UIKit
 import SwiftUI
+import AWSCognitoIdentityProvider
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    let loggedIn = false
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 
         // Create the SwiftUI view that provides the window contents.
+        let userPoolId:String = "GiftApp"
+        let pool = AWSCognitoIdentityUserPool(forKey: userPoolId)
+        // For testing signin, pool.clearAll()
+        let a = pool.currentUser()
+        if a?.username != nil {
+            let user = a!
+            user.getSession().continueWith(executor: AWSExecutor.mainThread()) { (task) -> () in
+                if let error = task.error {
+                    print("Error:\(error)")
+                } else {
+                    print("user session is: \(String(describing: task.result))")
+                    print(user.username!);
+                    print(user.confirmedStatus);
+                    self.presentView(scene, loggedIn: user.isSignedIn);
+                }
+            }
+        } else {
+            presentView(scene, loggedIn: false)
+        }
+    }
+    
+    func presentView(_ scene: UIScene, loggedIn: Bool) {
         let contentView = RootView(loggedIn: loggedIn)
-
+        
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
