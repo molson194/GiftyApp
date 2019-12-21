@@ -13,6 +13,7 @@ struct SendView: View {
     @State private var vendor: String = ""
     @State private var amount: String = ""
     @State private var comment: String = ""
+    @State private var payment: String = ""
     
     @State var showDetails = false
     var body: some View {
@@ -25,14 +26,16 @@ struct SendView: View {
                     .font(.largeTitle)
                 .fontWeight(.heavy)
                 .foregroundColor(Color(red: 209/255, green: 166/255, blue: 255/255, opacity: 1.0))
-                    .padding(.bottom, 20.0)
-                
-                // Divider
-                Rectangle()
-                .frame(height: 3.0)
-                .foregroundColor(Color(red: 209/255, green: 166/255, blue: 255/255, opacity: 1.0))
-                
+                    .padding(.bottom, 10.0)
             }
+            
+            
+            
+           Image("bow")
+            
+            
+            VStack{
+            
             
             // First Row
             HStack{
@@ -52,31 +55,53 @@ struct SendView: View {
             VStack{
                 // Divider
                 Rectangle()
-                .frame(height: 1.0)
+                .frame(height: 3.0)
                 .foregroundColor(Color(red: 209/255, green: 166/255, blue: 255/255, opacity: 1.0))
 
                 //Location
                 TextField("location (starbucks, apple, etc.)", text: $vendor)
                     .padding(.vertical, 5.0)
                 
-                // Divider
-                Rectangle()
-                .frame(height: 1.0)
-                .foregroundColor(Color(red: 209/255, green: 166/255, blue: 255/255, opacity: 1.0))
             }
             
             // Third Row
             VStack{
                 
+                // Divider
+                Rectangle()
+                .frame(height: 3.0)
+                .foregroundColor(Color(red: 209/255, green: 166/255, blue: 255/255, opacity: 1.0))
+                
                 // Comment
                 TextField("write something sweet! (ex: coffee on me!)", text: $comment)
                     .padding(.bottom, 200.0)
+                
                 
                 // Divider
                 Rectangle()
                 .frame(height: 3.0)
                 .foregroundColor(Color(red: 209/255, green: 166/255, blue: 255/255, opacity: 1.0))
              }
+            
+            // Fourth Row
+            VStack{
+                
+                // Comment
+                TextField("payment type", text: $payment)
+                    .padding(.vertical, 5.0)
+                
+                
+                
+             }
+            }.padding(25)
+            
+            .overlay(
+                RoundedRectangle(cornerRadius: 30)
+                    .stroke(Color(red: 209/255, green: 166/255, blue: 255/255, opacity: 1.0), lineWidth: 15)
+            )
+                .background(Color(red: 254/255, green: 252/255, blue: 255/255, opacity: 1.0))
+                .cornerRadius(30)
+                .shadow(radius: 2, x: 0, y: 4)
             
             // Button
             if !showDetails {
@@ -113,7 +138,7 @@ struct SendView: View {
                     .foregroundColor(.white)
             }
         }
-        }.padding(23.1)
+        }.padding()
 
 }
 
