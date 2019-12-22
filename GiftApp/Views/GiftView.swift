@@ -9,60 +9,47 @@
 import SwiftUI
 
 struct GiftView: View {
-    let details = Text("Caption")
-    @State var showDetails = false
     
     var body: some View {
-        VStack {
-           Image("card")
-               .resizable()
-               .aspectRatio(contentMode: .fit)
-
-           HStack {
-               VStack(alignment: .leading) {
-                   Text("From: Matt Olson")
-                       .font(.title)
-                       .fontWeight(.black)
-                       .foregroundColor(.primary)
-                       .lineLimit(3)
-                    Text("To: Nordstroms")
-                        .font(.title)
-                        .fontWeight(.black)
-                        .foregroundColor(.primary)
-                        .lineLimit(3)
-               }
-               Spacer()
-           }
-           .padding()
+        
+           
+        VStack{
             
-            // TODO: open the extra details when tapped
-            if showDetails {
-                //details.transition(.opacity)
+            // Location and Caption
+            VStack{
                 HStack {
-                    Text("Caption")
                     Spacer()
-                }
-                .padding()
                 
-                HStack {
-                    Text("$10.35")
+                    VStack {
+                        Text("Starbucks")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                        .padding(8.0)
+                        Text("Treat yourself to some really nice coffee, you deserve it man. Hope to see you soon!")
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal, 50.0)
+                    }
+            
                     Spacer()
-                    Text("Expires 1/20")
+                
+                
                 }
-                .padding()
             }
-       }
-        .onTapGesture {
-           withAnimation {
-              self.showDetails.toggle()
-           }
-        }
-       .cornerRadius(10)
-       .overlay(
-           RoundedRectangle(cornerRadius: 10)
-               .stroke(Color(.sRGB, red: 150/255, green: 150/255, blue: 150/255, opacity: 1), lineWidth: 1)
-       )
-       .padding([.top, .horizontal])
+            .padding(.vertical, 30)
+            .background(Color(red: 240/255, green: 240/255, blue: 240/255, opacity: 1))
+
+            // Person and amount remaining
+            HStack {
+                Spacer()
+                HStack{
+                    Text("Matthew Olson")
+                    Text("•")
+                    Text("$23.09")
+                }.padding()
+                Spacer()
+            }
+            .background(Color(red: 220/255, green: 220/255, blue: 220/255, opacity: 1))
+        }.cornerRadius(20)
     }
 }
 

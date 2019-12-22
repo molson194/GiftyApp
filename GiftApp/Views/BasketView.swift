@@ -13,11 +13,10 @@ struct BasketView: View {
         List {
             VStack {
                 ForEach(1...5, id: \.self) {_ in
-                    GiftView()
+                    GiftView().padding(.top)
                 }
             }
         }
-        .navigationBarTitle(Text("Basket"))
     }
 }
 

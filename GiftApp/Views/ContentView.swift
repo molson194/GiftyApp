@@ -70,6 +70,11 @@ struct ContentView: View {
             // Basket
             NavigationView{
                 BasketView()
+                    .navigationBarItems(leading:
+                    HStack {
+                     Text("All your remaining gifts!")
+                    })
+                .navigationBarTitle(Text("Basket"))
             }
                 .tabItem {
                     VStack {
