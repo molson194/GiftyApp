@@ -10,13 +10,30 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var selection = 0
+    
+    
+    init() {
+        UINavigationBar.appearance().barTintColor = UIColor(red: 209/255, green: 166/255, blue: 255/255, alpha: 1)
+        UINavigationBar.appearance().backgroundColor = UIColor(red: 209/255, green: 166/255, blue: 255/255, alpha: 1)
  
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
+        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+    }
+    
     var body: some View {
         
+        ZStack{
+
+            Color(red: 209/255, green: 166/255, blue: 255/255, opacity: 1).edgesIgnoringSafeArea(.all)
+
+        
+
         TabView(selection: $selection){
             
             // Promos
-            PromosView()
+            NavigationView{
+                PromosView()
+            }
                 .tabItem {
                     VStack {
                         Image("promos")
@@ -26,7 +43,9 @@ struct ContentView: View {
                 .tag(0)
             
             // Feed
-            FeedView()
+            NavigationView{
+                FeedView()
+            }
                 .tabItem {
                     VStack {
                         Image("feed")
@@ -36,7 +55,10 @@ struct ContentView: View {
                 .tag(1)
             
             // Send
-            SendView()
+            NavigationView{
+               SendView()
+                .navigationBarTitle(Text("Send"))
+            }
                 .tabItem {
                     VStack {
                         Image("send")
@@ -46,7 +68,9 @@ struct ContentView: View {
                 .tag(2)
             
             // Basket
-            BasketView()
+            NavigationView{
+                BasketView()
+            }
                 .tabItem {
                     VStack {
                         Image("basket")
@@ -56,7 +80,9 @@ struct ContentView: View {
                 .tag(3)
             
             // Profile
-            ProfileView()
+            NavigationView {
+               ProfileView()
+            }
                 .tabItem {
                     VStack {
                         Image("profile")
@@ -64,6 +90,9 @@ struct ContentView: View {
                     }
                 }
                 .tag(4)
+        }
+            
+            
         }
     }
 }
