@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct GiftView: View {
+    var gift: Gift
     
     var body: some View {
         
@@ -21,11 +22,11 @@ struct GiftView: View {
                     Spacer()
                 
                     VStack {
-                        Text("Starbucks")
+                        Text(gift.vendor)
                         .font(.largeTitle)
                         .fontWeight(.bold)
                         .padding(8.0)
-                        Text("Treat yourself to some really nice coffee, you deserve it man. Hope to see you soon!")
+                        Text(gift.caption)
                             .multilineTextAlignment(.center)
                             .padding(.horizontal, 50.0)
                     }
@@ -42,9 +43,9 @@ struct GiftView: View {
             HStack {
                 Spacer()
                 HStack{
-                    Text("Matthew Olson")
+                    Text(gift.fromId)
                     Text("•")
-                    Text("$23.09")
+                    Text("$" + gift.remainingBalance)
                 }.padding()
                 Spacer()
             }
@@ -55,6 +56,6 @@ struct GiftView: View {
 
 struct GiftView_Previews: PreviewProvider {
     static var previews: some View {
-        GiftView()
+        GiftView(gift: Gift(fromId: "+13035147424", vendor: "Chipotle", caption: "Tacos", remainingBalance: "10.00"))
     }
 }
