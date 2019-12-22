@@ -23,7 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let userPoolId:String = "GiftApp"
         let pool = AWSCognitoIdentityUserPool(forKey: userPoolId)
-        pool.clearAll()
+        //pool.clearAll()
         let a = pool.currentUser()
         if a?.username != nil {
             let user = a!

@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import AWSCognitoIdentityProvider
 
 struct SendView: View {
     @State private var friend: String = ""
@@ -14,8 +15,7 @@ struct SendView: View {
     @State private var amount: String = ""
     @State private var comment: String = ""
     @State private var payment: String = ""
-    
-    @State var showDetails = false
+    @State private var fromId: String = ""
     var body: some View {
         
         VStack {
@@ -104,43 +104,68 @@ struct SendView: View {
                 .shadow(radius: 2, x: 0, y: 4)
             
             // Button
-            if !showDetails {
-                Button(action: {
-                    self.showDetails.toggle()
-                }, label: {
-                    HStack {
-                        
-                        Text("send your gift :)")
-                            .fontWeight(.bold)
-                            .font(.headline)
-                            .padding()
-                    }
-                    .background(Color(red: 209/255, green: 166/255, blue: 255/255, opacity: 1.0))
-                    .cornerRadius(40)
-                    .foregroundColor(.white)
-                }).padding(.top)
-            }
-
-            if showDetails {
-                CardView()
-                
-                NavigationLink(destination: ContentView()) {
-                    HStack {
-                        Spacer()
-                        Text("Send " + vendor + " to " + friend)
-                            .fontWeight(.bold)
-                            .font(.headline)
-                            .padding()
-                        Spacer()
-                    }
-                    .background(Color(red: 209/255, green: 166/255, blue: 255/255, opacity: 1.0))
-                    .cornerRadius(CGFloat(40))
-                    .foregroundColor(.white)
-            }
-        }
+            Button(action: sendGift, label: {
+                HStack {
+                    
+                    Text("send your gift :)")
+                        .fontWeight(.bold)
+                        .font(.headline)
+                        .padding()
+                }
+                .background(Color(red: 209/255, green: 166/255, blue: 255/255, opacity: 1.0))
+                .cornerRadius(40)
+                .foregroundColor(.white)
+            }).padding(.top)
         }.padding()
-
-}
+    }
+    
+    func sendGift() {
+        
+        let userPoolId:String = "GiftApp"
+        let pool = AWSCognitoIdentityUserPool(forKey: userPoolId)
+        pool.currentUser()?.getDetails().continueOnSuccessWith(block: { (attrTask) -> Any? in
+            let taskAttributes = attrTask.result!
+            let attributes = taskAttributes.userAttributes
+            
+            for attribute in attributes! {
+                print(attribute.name!, attribute.value!)
+                if attribute.name == "phone_number" {
+                    self.fromId = attribute.value!
+                }
+            }
+            
+            return pool.currentUser()?.getSession()
+        }).continueOnSuccessWith(block: { (task) -> () in
+            let taskSession = task.result! as! AWSCognitoIdentityUserSession
+            let token = taskSession.idToken?.tokenString
+            let unwrappedToken = token!
+            
+            let params = ["fromId": self.fromId, "toId":self.friend, "paymentId":self.payment, "vendor":self.vendor, "caption": self.comment, "amount": Float(self.amount)!] as Dictionary<String, Any>
+            var request = URLRequest(url: URL(string: "https://ryg6sx9jzi.execute-api.us-east-2.amazonaws.com/default/SendGift")!)
+            
+            request.httpMethod = "POST"
+            request.httpBody = try? JSONSerialization.data(withJSONObject: params, options: [])
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.addValue("hZHTGjfHuO9GuFzoC4Ht828j93sg0htR6VTk4W4n", forHTTPHeaderField: "x-api-key")
+            request.setValue(unwrappedToken, forHTTPHeaderField: "Authorization")
+            
+            let session = URLSession.shared
+            let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
+                if data != nil{
+                    print(data!)
+                }
+                
+                if response != nil{
+                    print(response!)
+                }
+                
+                if error != nil{
+                    print(error!)
+                }
+            })
+            task.resume()
+        })
+    }
 
 }
 struct SendView_Previews: PreviewProvider {
