@@ -12,7 +12,7 @@ import AWSCognitoIdentityProvider
 struct LoginView: View {
     @State var phone: String = ""
     @State var password: String = ""
-    @State var loginSuccessful = false
+    @EnvironmentObject var userStatus : UserStatus
     
     var body: some View {
         
@@ -59,7 +59,7 @@ struct LoginView: View {
                     .foregroundColor(Color(red: 209/255, green: 166/255, blue: 255/255, opacity: 1.0))
                     
                     // Sign in
-                    NavigationLink(destination: ContentView(), isActive: self.$loginSuccessful) {
+                    
                         Button(action: login) {
                             Text("sign in :)")
                             .font(.headline)
@@ -69,7 +69,7 @@ struct LoginView: View {
                         .background(Color(red: 1, green: 1, blue: 1, opacity: 0.95))
                         .cornerRadius(8)
                         .padding(.vertical)
-                    }
+                    
                     
                 }.padding(.horizontal, 30.0)
         }
@@ -79,17 +79,18 @@ struct LoginView: View {
         let userPoolId:String = "GiftApp"
         let pool = AWSCognitoIdentityUserPool(forKey: userPoolId)
         let user = pool.getUser(phone)
-        user.getSession(phone, password: password, validationData: nil).continueOnSuccessWith { (task) -> () in
+        user.getSession(phone, password: password, validationData: nil).continueOnSuccessWith(executor: AWSExecutor.mainThread(), block: { (task) -> () in
             print("user session is: \(String(describing: task.result))")
             print(user.username!)
             print(user.confirmedStatus)
-            self.loginSuccessful = user.isSignedIn
-        }
+            self.userStatus.loggedIn = true
+        })
     }
 }
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView()
+        LoginView().environmentObject(UserStatus())
+        
     }
 }

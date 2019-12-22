@@ -9,6 +9,7 @@
 import UIKit
 import SwiftUI
 import AWSCognitoIdentityProvider
+import Foundation
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -19,9 +20,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 
         // Create the SwiftUI view that provides the window contents.
+        
         let userPoolId:String = "GiftApp"
         let pool = AWSCognitoIdentityUserPool(forKey: userPoolId)
-        // For testing signin, pool.clearAll()
+        pool.clearAll()
         let a = pool.currentUser()
         if a?.username != nil {
             let user = a!
@@ -41,12 +43,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func presentView(_ scene: UIScene, loggedIn: Bool) {
-        let contentView = RootView(loggedIn: loggedIn)
+        let userStatus = UserStatus()
+        userStatus.loggedIn = loggedIn
+        let rootView = RootView().environmentObject(userStatus)
         
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            window.rootViewController = UIHostingController(rootView: contentView)
+            window.rootViewController = UIHostingController(rootView: rootView)
             self.window = window
             window.makeKeyAndVisible()
         }

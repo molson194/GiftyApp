@@ -9,7 +9,11 @@
 import SwiftUI
 
 struct WelcomeView: View {
+    @EnvironmentObject var userStatus : UserStatus
     var body: some View {
+        
+        NavigationView {
+            
         ZStack {
 
             //Background Color
@@ -37,7 +41,7 @@ struct WelcomeView: View {
                 HStack{
 
                     // Sign Up
-                    NavigationLink(destination: SignupView()) {
+                    NavigationLink(destination: SignupView().environmentObject(userStatus)) {
                         Text("sign up!")
                             .font(.headline)
                             .padding()
@@ -48,7 +52,7 @@ struct WelcomeView: View {
                         .padding([.top, .leading, .bottom])
                     
                     // Log In
-                    NavigationLink(destination: LoginView()) {
+                    NavigationLink(destination: LoginView().environmentObject(userStatus)) {
                         Text("I have an account :)")
                             .font(.headline)
                             .padding()
@@ -65,11 +69,12 @@ struct WelcomeView: View {
                                    
             }
         }
+            }
     }
 }
 
 struct WelcomeView_Previews: PreviewProvider {
     static var previews: some View {
-        WelcomeView()
+        WelcomeView().environmentObject(UserStatus())
     }
 }

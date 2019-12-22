@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CB42511E23AEEDF40069F211 /* UserStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB42511D23AEEDF40069F211 /* UserStatus.swift */; };
 		CB9B5A61239375CD009043F2 /* PromosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9B5A60239375CD009043F2 /* PromosView.swift */; };
 		CB9B5A6323937856009043F2 /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9B5A6223937856009043F2 /* FeedView.swift */; };
 		CB9B5A6523937886009043F2 /* SendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9B5A6423937886009043F2 /* SendView.swift */; };
@@ -33,6 +34,7 @@
 /* Begin PBXFileReference section */
 		2ED7926B38C947963EC8F1D4 /* Pods-GiftApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GiftApp.release.xcconfig"; path = "Target Support Files/Pods-GiftApp/Pods-GiftApp.release.xcconfig"; sourceTree = "<group>"; };
 		8E1C5E16143CB21F61EDD007 /* Pods_GiftApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GiftApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CB42511D23AEEDF40069F211 /* UserStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStatus.swift; sourceTree = "<group>"; };
 		CB9B5A60239375CD009043F2 /* PromosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromosView.swift; sourceTree = "<group>"; };
 		CB9B5A6223937856009043F2 /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
 		CB9B5A6423937886009043F2 /* SendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendView.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 				F02218C823595BAD0097F5BB /* Assets.xcassets */,
 				F02218CD23595BAD0097F5BB /* LaunchScreen.storyboard */,
 				F02218D023595BAD0097F5BB /* Info.plist */,
+				CB42511D23AEEDF40069F211 /* UserStatus.swift */,
 			);
 			path = GiftApp;
 			sourceTree = "<group>";
@@ -273,6 +276,7 @@
 				F0FDD7A1239E0D9100E1233A /* CardsView.swift in Sources */,
 				F02218C523595BA90097F5BB /* SceneDelegate.swift in Sources */,
 				F02218D723595DC70097F5BB /* SignupView.swift in Sources */,
+				CB42511E23AEEDF40069F211 /* UserStatus.swift in Sources */,
 				F0BCE7492392282000A851C3 /* VerifyPhoneView.swift in Sources */,
 				F0A21860239F6C67005591B4 /* AddCardView.swift in Sources */,
 				F0FDD79F239E0D5500E1233A /* BankTransferView.swift in Sources */,

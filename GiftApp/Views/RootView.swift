@@ -9,20 +9,21 @@
 import SwiftUI
 
 struct RootView: View {
-    var loggedIn: Bool
+    @EnvironmentObject var userStatus : UserStatus
     var body: some View {
-        NavigationView {
-            if loggedIn {
-                ContentView()
+        ZStack{
+            if userStatus.loggedIn {
+                ContentView()  
             } else {
-                WelcomeView()
+                WelcomeView().environmentObject(userStatus)
             }
         }
     }
 }
 
+
 struct RootView_Previews: PreviewProvider {
     static var previews: some View {
-        RootView(loggedIn: true)
+        RootView().environmentObject(UserStatus())
     }
 }
