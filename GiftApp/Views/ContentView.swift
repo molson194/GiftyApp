@@ -25,6 +25,14 @@ struct ContentView: View {
             // Promos
             NavigationView{
                 PromosView()
+                .navigationBarTitle(Text("Promos"),displayMode: .inline)
+                .navigationBarItems(trailing:
+                    HStack {
+                        Image(systemName: "slider.horizontal.3")
+                        .font(.title)
+                        
+                    }
+                )
             }
                 .tabItem {
                     VStack {
@@ -37,6 +45,14 @@ struct ContentView: View {
             // Feed
             NavigationView{
                 FeedView()
+                .navigationBarTitle(Text("Feed"),displayMode: .inline)
+                .navigationBarItems(trailing:
+                    HStack {
+                        Image(systemName: "slider.horizontal.3")
+                        .font(.title)
+                        
+                    }
+                )
             }
                 .tabItem {
                     VStack {
@@ -49,7 +65,14 @@ struct ContentView: View {
             // Send
             NavigationView{
                SendView()
-                .navigationBarTitle(Text("Send"))
+               .navigationBarTitle(Text("Send"),displayMode: .inline)
+                .navigationBarItems(trailing:
+                    HStack {
+                        Image(systemName: "slider.horizontal.3")
+                        .font(.title)
+                        
+                    }
+                )
             }
                 .tabItem {
                     VStack {
@@ -62,9 +85,14 @@ struct ContentView: View {
             // Basket
             NavigationView{
                 BasketView()
-                    
-                    .navigationBarTitle(Text("Basket"))
-                    
+                .navigationBarTitle(Text("Basket"),displayMode: .inline)
+                .navigationBarItems(trailing:
+                    HStack {
+                        Image(systemName: "slider.horizontal.3")
+                        .font(.title)
+                        
+                    }
+                )
             }
                 .tabItem {
                     VStack {
@@ -77,6 +105,14 @@ struct ContentView: View {
             // Profile
             NavigationView {
                ProfileView()
+                .navigationBarTitle(Text("Profile"),displayMode: .inline)
+                .navigationBarItems(trailing:
+                    HStack {
+                        Image(systemName: "slider.horizontal.3")
+                        .font(.title)
+                        
+                    }
+                )
             }
                 .tabItem {
                     VStack {
@@ -85,15 +121,9 @@ struct ContentView: View {
                     }
                 }
                 .tag(4)
-        }
-            
-            
+            }
         }
     }
-    
-    
-    
-    
 }
 
 struct ContentView_Previews: PreviewProvider {

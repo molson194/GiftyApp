@@ -11,7 +11,6 @@ import SwiftUI
 struct PromosView: View {
     var body: some View {
         Text("More to come.")
-            .navigationBarTitle(Text("Promos"))
     }
 }
 

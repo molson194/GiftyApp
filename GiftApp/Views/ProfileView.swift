@@ -67,7 +67,6 @@ struct ProfileView: View {
             
         }
         .padding()
-        .navigationBarTitle(Text("Profile"))
     }
 }
 

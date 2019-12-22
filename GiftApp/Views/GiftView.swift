@@ -37,7 +37,7 @@ struct GiftView: View {
                 }
             }
             .padding(.vertical, 30)
-            .background(Color(red: 240/255, green: 240/255, blue: 240/255, opacity: 1))
+            .background(Color(red: 255/255, green: 255/255, blue: 255/255, opacity: 1))
 
             // Person and amount remaining
             HStack {
@@ -51,7 +51,7 @@ struct GiftView: View {
             }
             .background(Color(red: 220/255, green: 220/255, blue: 220/255, opacity: 1))
         }.cornerRadius(20)
-        .shadow(radius: 2, x: 0, y: 4)
+        .shadow(radius: 3, x: 0, y: 0)
     }
 }
 
