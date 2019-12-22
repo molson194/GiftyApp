@@ -28,6 +28,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         AWSCognitoIdentityUserPool.register(with: serviceConfiguration, userPoolConfiguration: cognitoConfiguration, forKey: userPoolId)
         
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithDefaultBackground()
+        appearance.backgroundColor = UIColor(red: 209/255, green: 166/255, blue: 255/255, alpha: 1)
+        UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        UINavigationBar.appearance().standardAppearance = appearance
+        
         return true
     }
 

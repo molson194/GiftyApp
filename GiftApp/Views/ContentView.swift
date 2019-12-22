@@ -12,14 +12,6 @@ struct ContentView: View {
     @State private var selection = 0
     
     
-    init() {
-        UINavigationBar.appearance().barTintColor = UIColor(red: 209/255, green: 166/255, blue: 255/255, alpha: 1)
-        UINavigationBar.appearance().backgroundColor = UIColor(red: 209/255, green: 166/255, blue: 255/255, alpha: 1)
- 
-        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
-        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-    }
-    
     var body: some View {
         
         ZStack{
@@ -70,11 +62,9 @@ struct ContentView: View {
             // Basket
             NavigationView{
                 BasketView()
-                    .navigationBarItems(leading:
-                    HStack {
-                     Text("All your remaining gifts!")
-                    })
-                .navigationBarTitle(Text("Basket"))
+                    
+                    .navigationBarTitle(Text("Basket"))
+                    
             }
                 .tabItem {
                     VStack {
@@ -100,6 +90,10 @@ struct ContentView: View {
             
         }
     }
+    
+    
+    
+    
 }
 
 struct ContentView_Previews: PreviewProvider {

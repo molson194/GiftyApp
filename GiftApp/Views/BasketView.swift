@@ -22,6 +22,9 @@ struct BasketView: View {
                 }
             }
         }.onAppear(perform: getGifts)
+    
+        //TODO: Don't reload from db. Cache obhects and pull to refresh.
+        
     }
     
     func getGifts() {
