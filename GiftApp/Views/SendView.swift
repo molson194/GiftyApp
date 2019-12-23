@@ -20,102 +20,183 @@ struct SendView: View {
         
         VStack {
             
-            // Page Title
+            
+            if !comment.isEmpty && !vendor.isEmpty && !amount.isEmpty && !friend.isEmpty {
+            // Current Balance
             VStack{
-                Text("let's get gifty 🥳")
-                    .font(.largeTitle)
-                .fontWeight(.heavy)
-                .foregroundColor(Color(red: 209/255, green: 166/255, blue: 255/255, opacity: 1.0))
-                    .padding(.bottom, 10.0)
+                HStack {
+                        Spacer()
+                        HStack{
+                            Text("Gift Balance: $25.00")
+                                .font(.headline)
+                                .fontWeight(.medium)
+                            
+                        }.padding()
+                        Spacer()
+                    }
+                    .background(Color(red: 220/255, green: 220/255, blue: 220/255, opacity: 1))
+                }
+                .cornerRadius(20)
+                .shadow(radius: 3, x: 0, y: 0)
             }
             
-            
-            
-           Image("bow")
-            
-            
             VStack{
-            
-            
-            // First Row
-            HStack{
-                // Name
-                TextField("your friend's name", text: $friend)
-                    .padding(.vertical, 5.0)
-                
-                // Amount
-                TextField("$0.00 ", text: $amount)
-                    .padding(.vertical, 5.0)
-                .keyboardType(.numberPad)
-                .multilineTextAlignment(.trailing)
-                
+                VStack{
+                    
+                    
+                    Image(systemName: "app.gift")
+                        .resizable()
+                        .frame(width: 60.0, height: 60.0)
+                        .padding(.bottom)
+                        
+                    .foregroundColor(Color(red: 209/255, green: 166/255, blue: 255/255, opacity: 1.0))
+                    
+                        
+                        // First Row
+                        VStack{
+                            // Name
+                            ZStack(alignment: .center) {
+                                if friend.isEmpty {
+                                    Text("Who's getting the gift?")
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.gray)
+                                        .font(.system(size: 30))
+                                }
+                                TextField(" ", text: $friend)
+                                    .font(.system(size: 30, weight: .bold))
+                                    .multilineTextAlignment(.center)
+                                }
+                            
+                        }
+                    
+                    if !friend.isEmpty {
+                        // Second Row
+                        
+                        // Divider
+                        Rectangle()
+                        .frame(height: 4.0)
+                        .foregroundColor(Color.black)
+                        
+                        VStack{
+                            HStack {
+                                //Location
+                                ZStack(alignment: .leading) {
+                                    if vendor.isEmpty {
+                                        Text("Location ")
+                                            .fontWeight(.bold)
+                                            .foregroundColor(.gray)
+                                            .font(.system(size: 18))
+                                            .padding(.vertical, 5.0)
+                                    }
+                                    TextField(" ", text: $vendor)
+                                        .font(.system(size: 18, weight: .bold))
+                                        .multilineTextAlignment(.leading)
+                                        .padding(.vertical, 5.0)
+                                }
+                            
+                                // Amount
+                                ZStack(alignment: .trailing) {
+                                    if amount.isEmpty {
+                                        Text("$0.00")
+                                            .fontWeight(.bold)
+                                            .foregroundColor(.gray)
+                                            .font(.system(size: 18))
+                                            .padding(.vertical, 5.0)
+                                    }
+                                    TextField(" ", text: $amount)
+                                        .font(.system(size: 18, weight: .bold))
+                                        .multilineTextAlignment(.trailing)
+                                        .padding(.vertical, 5.0)
+                                }
+                            }
+                            
+                            
+                            
+                        }
+                    }
+                    if !vendor.isEmpty && !amount.isEmpty && !friend.isEmpty {
+                        // Third Row
+                        
+                        // Divider
+                        Rectangle()
+                        .frame(height: 1.0)
+                        .foregroundColor(Color.black)
+                        
+                        VStack{
+                            // Comment
+                            ZStack(alignment: .leading) {
+                                if comment.isEmpty {
+                                    Text("write something sweet!")
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.gray)
+                                        .font(.system(size: 18))
+                                        .padding(.bottom, 100)
+                                }
+ 
+                                TextField(" ", text: $comment)
+                                    .font(.system(size: 18, weight: .bold))
+                                    .multilineTextAlignment(.leading)
+                                    .padding(.bottom, 100)
+                            }
+                            
+                            
+                         }
+                    }
+                    
+                    if !comment.isEmpty && !vendor.isEmpty && !amount.isEmpty && !friend.isEmpty {
+                        // Fourth Row
+                        
+                        
+                        // Divider
+                        Rectangle()
+                        .frame(height: 1.0)
+                        .foregroundColor(Color.black)
+                        
+                        VStack{
+                            // Payment type
+                            ZStack(alignment: .leading) {
+                               if payment.isEmpty {
+                                   Text("Payment Type ")
+                                       .fontWeight(.bold)
+                                       .foregroundColor(.gray)
+                                       .font(.system(size: 18))
+                                       .padding(.vertical, 5.0)
+                               }
+                            TextField(" ", text: $payment)
+                                .font(.system(size: 18, weight: .bold))
+                                .multilineTextAlignment(.leading)
+                                .padding(.vertical, 5.0)
+                                
+                            }
+   
+                         }
+                    }
+                }
+                .padding(22)
+                .background(Color(red: 255/255, green: 255/255, blue: 255/255, opacity: 1))
             }
-            
-            // Second Row
-            VStack{
-                // Divider
-                Rectangle()
-                .frame(height: 3.0)
-                .foregroundColor(Color(red: 209/255, green: 166/255, blue: 255/255, opacity: 1.0))
-
-                //Location
-                TextField("location (starbucks, apple, etc.)", text: $vendor)
-                    .padding(.vertical, 5.0)
-                
-            }
-            
-            // Third Row
-            VStack{
-                
-                // Divider
-                Rectangle()
-                .frame(height: 3.0)
-                .foregroundColor(Color(red: 209/255, green: 166/255, blue: 255/255, opacity: 1.0))
-                
-                // Comment
-                TextField("write something sweet! (ex: coffee on me!)", text: $comment)
-                    .padding(.bottom, 200.0)
-                
-                
-                // Divider
-                Rectangle()
-                .frame(height: 3.0)
-                .foregroundColor(Color(red: 209/255, green: 166/255, blue: 255/255, opacity: 1.0))
-             }
-            
-            // Fourth Row
-            VStack{
-                
-                // Comment
-                TextField("payment type", text: $payment)
-                    .padding(.vertical, 5.0)
-                
-                
-                
-             }
-            }.padding(25)
-            
-            .overlay(
-                RoundedRectangle(cornerRadius: 30)
-                    .stroke(Color(red: 209/255, green: 166/255, blue: 255/255, opacity: 1.0), lineWidth: 15)
-            )
-                .background(Color(red: 254/255, green: 252/255, blue: 255/255, opacity: 1.0))
-                .cornerRadius(30)
-                .shadow(radius: 2, x: 0, y: 4)
-            
+            .cornerRadius(20)
+            .shadow(color: Color.gray,radius: 4, x: 0, y: 1)
+               
             // Button
+        
+            if !payment.isEmpty && !comment.isEmpty && !vendor.isEmpty && !amount.isEmpty && !friend.isEmpty{
             Button(action: sendGift, label: {
                 HStack {
-                    
+                    Spacer()
+                    Image(systemName: "gift")
                     Text("send your gift :)")
                         .fontWeight(.bold)
                         .font(.headline)
-                        .padding()
+                        .padding([.top, .bottom, .trailing])
+                    Spacer()
                 }
                 .background(Color(red: 209/255, green: 166/255, blue: 255/255, opacity: 1.0))
-                .cornerRadius(40)
+                .cornerRadius(20)
                 .foregroundColor(.white)
-            }).padding(.top)
+            }).padding()
+            }
+            Spacer();
         }.padding()
     }
     

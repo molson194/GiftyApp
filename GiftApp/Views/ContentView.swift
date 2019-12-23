@@ -26,7 +26,12 @@ struct ContentView: View {
             NavigationView{
                 PromosView()
                 .navigationBarTitle(Text("Promos"),displayMode: .inline)
-                .navigationBarItems(trailing:
+                .navigationBarItems(leading:
+                    HStack {
+                        Image(systemName: "gift")
+                        .font(.title)
+                        
+                    }, trailing:
                     HStack {
                         Image(systemName: "slider.horizontal.3")
                         .font(.title)
@@ -46,7 +51,12 @@ struct ContentView: View {
             NavigationView{
                 FeedView()
                 .navigationBarTitle(Text("Feed"),displayMode: .inline)
-                .navigationBarItems(trailing:
+                .navigationBarItems(leading:
+                    HStack {
+                        Image(systemName: "gift")
+                        .font(.title)
+                        
+                    }, trailing:
                     HStack {
                         Image(systemName: "slider.horizontal.3")
                         .font(.title)
@@ -66,7 +76,12 @@ struct ContentView: View {
             NavigationView{
                SendView()
                .navigationBarTitle(Text("Send"),displayMode: .inline)
-                .navigationBarItems(trailing:
+                .navigationBarItems(leading:
+                    HStack {
+                        Image(systemName: "gift")
+                        .font(.title)
+                        
+                    }, trailing:
                     HStack {
                         Image(systemName: "slider.horizontal.3")
                         .font(.title)
@@ -86,7 +101,12 @@ struct ContentView: View {
             NavigationView{
                 BasketView()
                 .navigationBarTitle(Text("Basket"),displayMode: .inline)
-                .navigationBarItems(trailing:
+                .navigationBarItems(leading:
+                    HStack {
+                        Image(systemName: "gift")
+                        .font(.title)
+                        
+                    }, trailing:
                     HStack {
                         Image(systemName: "slider.horizontal.3")
                         .font(.title)
@@ -106,7 +126,12 @@ struct ContentView: View {
             NavigationView {
                ProfileView()
                 .navigationBarTitle(Text("Profile"),displayMode: .inline)
-                .navigationBarItems(trailing:
+                .navigationBarItems(leading:
+                    HStack {
+                        Image(systemName: "gift")
+                        .font(.title)
+                        
+                    }, trailing:
                     HStack {
                         Image(systemName: "slider.horizontal.3")
                         .font(.title)
