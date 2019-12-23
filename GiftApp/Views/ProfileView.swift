@@ -28,7 +28,6 @@ struct ProfileView: View {
                             .font(.title)
                             .fontWeight(.black)
                             .foregroundColor(.primary)
-                            .lineLimit(3)
                             .padding(.bottom)
                     }
                     Spacer()
