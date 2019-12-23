@@ -19,55 +19,73 @@ struct SendView: View {
     var body: some View {
         
         VStack {
-            
-            
-            if !comment.isEmpty && !vendor.isEmpty && !amount.isEmpty && !friend.isEmpty {
-            // Current Balance
-            VStack{
-                HStack {
-                        Spacer()
-                        HStack{
-                            Text("Gift Balance: $25.00")
-                                .font(.headline)
-                                .fontWeight(.medium)
-                            
-                        }.padding()
-                        Spacer()
-                    }
-                    .background(Color(red: 220/255, green: 220/255, blue: 220/255, opacity: 1))
-                }
-                .cornerRadius(20)
-                .shadow(radius: 3, x: 0, y: 0)
-            }
-            
             VStack{
                 VStack{
                     
+                    // Image Chain
+                    HStack{
+                        Image(systemName: "person.circle")
+                            .resizable()
+                            .frame(width: 35.0, height: 35.0)
+                            .foregroundColor(Color(red: 209/255, green: 166/255, blue: 255/255, opacity: 1.0))
                     
-                    Image(systemName: "app.gift")
-                        .resizable()
-                        .frame(width: 60.0, height: 60.0)
-                        .padding(.bottom)
-                        
-                    .foregroundColor(Color(red: 209/255, green: 166/255, blue: 255/255, opacity: 1.0))
-                    
-                        
-                        // First Row
-                        VStack{
-                            // Name
-                            ZStack(alignment: .center) {
-                                if friend.isEmpty {
-                                    Text("Who's getting the gift?")
-                                        .fontWeight(.bold)
-                                        .foregroundColor(.gray)
-                                        .font(.system(size: 30))
-                                }
-                                TextField(" ", text: $friend)
-                                    .font(.system(size: 30, weight: .bold))
-                                    .multilineTextAlignment(.center)
-                                }
-                            
+                        if !friend.isEmpty {
+                            Image(systemName: "arrow.right")
+                                .resizable()
+                                .frame(width: 20.0, height: 20.0)
+                                .foregroundColor(Color.gray)
+                                
+                            Image(systemName: "map")
+                                .resizable()
+                                .frame(width: 35.0, height: 35.0)
+                                .foregroundColor(Color(red: 209/255, green: 166/255, blue: 255/255, opacity: 1.0))
+                                
+                            Image(systemName: "dollarsign.circle")
+                                .resizable()
+                                .frame(width: 35.0, height: 35.0)
+                                .foregroundColor(Color(red: 209/255, green: 166/255, blue: 255/255, opacity: 1.0))
                         }
+                    
+                        if !vendor.isEmpty && !amount.isEmpty && !friend.isEmpty {
+                            Image(systemName: "arrow.right")
+                                .resizable()
+                                .frame(width: 20.0, height: 20.0)
+                                .foregroundColor(Color.gray)
+                                
+                            Image(systemName: "pencil.tip.crop.circle")
+                                .resizable()
+                                .frame(width: 35.0, height: 35.0)
+                                .foregroundColor(Color(red: 209/255, green: 166/255, blue: 255/255, opacity: 1.0))
+                        }
+                    
+                        if !comment.isEmpty && !vendor.isEmpty && !amount.isEmpty && !friend.isEmpty {
+                            Image(systemName: "arrow.right")
+                                .resizable()
+                                .frame(width: 20.0, height: 20.0)
+                                .foregroundColor(Color.gray)
+                                
+                            Image(systemName: "creditcard")
+                                .resizable()
+                                .frame(width: 40.0, height: 35.0)
+                                .foregroundColor(Color(red: 209/255, green: 166/255, blue: 255/255, opacity: 1.0))
+                        }
+                    }
+                    // First Row
+                    VStack{
+                        // Name
+                        ZStack(alignment: .center) {
+                            if friend.isEmpty {
+                                Text("Who's getting the gift?")
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.gray)
+                                    .font(.system(size: 30))
+                            }
+                            TextField(" ", text: $friend)
+                                .font(.system(size: 30, weight: .bold))
+                                .multilineTextAlignment(.center)
+                            }
+                        
+                    }
                     
                     if !friend.isEmpty {
                         // Second Row
@@ -114,6 +132,7 @@ struct SendView: View {
                             
                         }
                     }
+                    
                     if !vendor.isEmpty && !amount.isEmpty && !friend.isEmpty {
                         // Third Row
                         
