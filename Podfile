@@ -6,4 +6,5 @@ use_frameworks!
 target 'GiftApp' do
     pod 'AWSCore'
     pod 'AWSCognitoIdentityProvider'
+    pod 'Plaid'
 end

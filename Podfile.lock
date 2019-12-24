@@ -4,22 +4,26 @@ PODS:
     - AWSCore (= 2.6.25)
   - AWSCognitoIdentityProviderASF (1.0.1)
   - AWSCore (2.6.25)
+  - Plaid (1.1.10)
 
 DEPENDENCIES:
   - AWSCognitoIdentityProvider
   - AWSCore
+  - Plaid
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - AWSCognitoIdentityProvider
     - AWSCognitoIdentityProviderASF
     - AWSCore
+    - Plaid
 
 SPEC CHECKSUMS:
   AWSCognitoIdentityProvider: 4a417e3f669c310253be85b0b0d884e144758761
   AWSCognitoIdentityProviderASF: f94f1a502e72ef3d0a1de93e10bf7a79c8698118
   AWSCore: 93ac57c361f6ff9c0749adf9404c4a1a1ecdaa2b
+  Plaid: 12dcbdb591ad64f015162964f4b3b7fc2c5fb37d
 
-PODFILE CHECKSUM: bfbcac0bef5a4efd1d1f107a386acfb1e3d079ce
+PODFILE CHECKSUM: a1afa0bda0b3b0cf827bc9230c7a9e234dbea626
 
 COCOAPODS: 1.8.4

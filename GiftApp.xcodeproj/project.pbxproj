@@ -27,6 +27,7 @@
 		F0A21860239F6C67005591B4 /* AddCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A2185F239F6C67005591B4 /* AddCardView.swift */; };
 		F0A21862239F7307005591B4 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A21861239F7307005591B4 /* CardView.swift */; };
 		F0BCE7492392282000A851C3 /* VerifyPhoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0BCE7482392282000A851C3 /* VerifyPhoneView.swift */; };
+		F0D17AAA23B1921700AD91BC /* AddAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D17AA923B1921700AD91BC /* AddAccountViewController.swift */; };
 		F0FDD79F239E0D5500E1233A /* BankTransferView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FDD79E239E0D5500E1233A /* BankTransferView.swift */; };
 		F0FDD7A1239E0D9100E1233A /* CardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FDD7A0239E0D9100E1233A /* CardsView.swift */; };
 /* End PBXBuildFile section */
@@ -56,6 +57,7 @@
 		F0A2185F239F6C67005591B4 /* AddCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardView.swift; sourceTree = "<group>"; };
 		F0A21861239F7307005591B4 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		F0BCE7482392282000A851C3 /* VerifyPhoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyPhoneView.swift; sourceTree = "<group>"; };
+		F0D17AA923B1921700AD91BC /* AddAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAccountViewController.swift; sourceTree = "<group>"; };
 		F0FDD79E239E0D5500E1233A /* BankTransferView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankTransferView.swift; sourceTree = "<group>"; };
 		F0FDD7A0239E0D9100E1233A /* CardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -141,6 +143,7 @@
 				F0A2185F239F6C67005591B4 /* AddCardView.swift */,
 				F0A21861239F7307005591B4 /* CardView.swift */,
 				F00FEF8E23A0B12C00A8D6BF /* RootView.swift */,
+				F0D17AA923B1921700AD91BC /* AddAccountViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -164,6 +167,7 @@
 				F02218BC23595BA90097F5BB /* Frameworks */,
 				F02218BD23595BA90097F5BB /* Resources */,
 				DAC4B8DDF4542BC0EA452B38 /* [CP] Embed Pods Frameworks */,
+				F0D17AA823B18D1500AD91BC /* Prepare for Distribution */,
 			);
 			buildRules = (
 			);
@@ -260,6 +264,24 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GiftApp/Pods-GiftApp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		F0D17AA823B18D1500AD91BC /* Prepare for Distribution */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Prepare for Distribution";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "LINK_ROOT=${PODS_ROOT:+$PODS_ROOT/Plaid/ios}\ncp \"${LINK_ROOT:-$PROJECT_DIR}\"/LinkKit.framework/prepare_for_distribution.sh \"${CODESIGNING_FOLDER_PATH}\"/Frameworks/LinkKit.framework/prepare_for_distribution.sh\n\"${CODESIGNING_FOLDER_PATH}\"/Frameworks/LinkKit.framework/prepare_for_distribution.sh\n\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -269,6 +291,7 @@
 			files = (
 				CB9B5A6723937896009043F2 /* BasketView.swift in Sources */,
 				F03597342390BFA3008EF87C /* LoginView.swift in Sources */,
+				F0D17AAA23B1921700AD91BC /* AddAccountViewController.swift in Sources */,
 				CB9B5A6323937856009043F2 /* FeedView.swift in Sources */,
 				F03597322390AC72008EF87C /* WelcomeView.swift in Sources */,
 				CB9B5A69239378A6009043F2 /* ProfileView.swift in Sources */,
