@@ -7,8 +7,10 @@
 //
 
 import SwiftUI
+import AWSCognitoIdentityProvider
 
 struct ProfileView: View {
+    @State private var balance: String = "?"
     var body: some View {
         VStack{
             
@@ -36,7 +38,7 @@ struct ProfileView: View {
                 // Balance
                 HStack{
                     Spacer()
-                    Text("Balance: $25")
+                    Text("Balance: $" + balance)
                         .font(.headline)
                         .fontWeight(.bold)
                         .padding()
@@ -85,7 +87,56 @@ struct ProfileView: View {
             Spacer()
         }
         .padding()
+        .onAppear(perform: getBalance)
     }
+    
+    func getBalance() {
+        print("here")
+        // get user phone number
+        let userPoolId:String = "GiftApp"
+        let pool = AWSCognitoIdentityUserPool(forKey: userPoolId)
+        let userId = (pool.currentUser()?.username)!
+        
+        pool.currentUser()?.getSession().continueOnSuccessWith(block: { (task) -> () in
+            // make lambda api call
+            let taskSession = task.result!
+            let token = taskSession.idToken?.tokenString
+            let unwrappedToken = token!
+            
+            let params = ["userId": userId] as Dictionary<String, Any>
+            var request = URLRequest(url: URL(string: "https://3dyfpu69cg.execute-api.us-east-2.amazonaws.com/default/GetBalance")!)
+            
+            request.httpMethod = "POST"
+            request.httpBody = try? JSONSerialization.data(withJSONObject: params, options: [])
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.addValue("IZNFK8M0xK9Q8qCEqJyBL5vncsDcajIN7PI2Ojhx", forHTTPHeaderField: "x-api-key")
+            request.setValue(unwrappedToken, forHTTPHeaderField: "Authorization")
+            
+            let session = URLSession.shared
+            let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
+                if data != nil{
+                    print(data!)
+                    let jsonDecoder = JSONDecoder()
+                    do {
+                        let floatBalance = try jsonDecoder.decode(Float.self, from: data!)
+                        self.balance = NSString(format: "%.2f", floatBalance) as String
+                    } catch {
+                        print(error)
+                    }
+                }
+                
+                if response != nil{
+                    print(response!)
+                }
+                
+                if error != nil{
+                    print(error!)
+                }
+            })
+            task.resume()
+        })
+    }
+    
 }
 
 struct ProfileView_Previews: PreviewProvider {
