@@ -10,7 +10,11 @@ import SwiftUI
 
 struct AddCardView: View {
     var body: some View {
+        VStack{
         AddAccountViewController()
+            .navigationBarTitle("")
+            .navigationBarHidden(true)
+        }
     }
 }
 

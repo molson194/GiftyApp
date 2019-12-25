@@ -138,7 +138,7 @@ struct ContentView: View {
                         
                     }
                 )
-            }
+            }.accentColor(.black)
                 .tabItem {
                     VStack {
                         Image("profile")
