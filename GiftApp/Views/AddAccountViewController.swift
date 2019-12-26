@@ -38,6 +38,7 @@ struct AddAccountViewController: UIViewControllerRepresentable {
             let institution = metadata!["institution"] as! [String : Any]
             let bankName = institution["name"]
             
+            let accounts = metadata!["accounts"] as! [NSArray]
             
             let userPoolId:String = "GiftApp"
             let pool = AWSCognitoIdentityUserPool(forKey: userPoolId)
@@ -59,7 +60,7 @@ struct AddAccountViewController: UIViewControllerRepresentable {
                 let token = taskSession.idToken?.tokenString
                 let unwrappedToken = token!
                 
-                let params = ["username": user!.username!, "phone":self.phone, "bankName":bankName!, "accessToken":publicToken] as Dictionary<String, Any>
+                let params = ["username": user!.username!, "phone":self.phone, "bankName":bankName!, "accessToken":publicToken, "accounts":accounts] as Dictionary<String, Any>
                 var request = URLRequest(url: URL(string: "https://v1dv1bik8f.execute-api.us-east-2.amazonaws.com/default/AddUpdateAccount")!)
                 
                 request.httpMethod = "POST"
