@@ -177,7 +177,7 @@ struct SendView: View {
                                 VStack {
                                     if myAccounts.count > 0 {
                                         ForEach(0...myAccounts.count-1, id: \.self) {ippp in
-                                            Text(self.myAccounts[ippp].bank + " " + self.myAccounts[ippp].mask)
+                                            Text(self.myAccounts[ippp].bank + " " + self.myAccounts[ippp].accountMask)
                                         }
                                     }
                                 }
@@ -212,6 +212,7 @@ struct SendView: View {
             Spacer();
         }
         .padding()
+        .onAppear(perform: getAccounts)
     }
     
     func getAccounts() {
@@ -237,7 +238,7 @@ struct SendView: View {
             let session = URLSession.shared
             let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
                 if data != nil{
-                    print(data!)
+                    print(String(data: data!, encoding:String.Encoding.utf8)!)
                     let jsonDecoder = JSONDecoder()
                     do {
                         self.myAccounts = try jsonDecoder.decode(Array<Account>.self, from: data!)
