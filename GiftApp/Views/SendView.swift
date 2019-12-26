@@ -16,6 +16,7 @@ struct SendView: View {
     @State private var comment: String = ""
     @State private var payment: String = ""
     @State private var fromId: String = ""
+    @State private var myAccounts: Array<Account> = []
     var body: some View {
         
         VStack {
@@ -171,24 +172,17 @@ struct SendView: View {
                         .frame(height: 1.0)
                         .foregroundColor(Color.black)
                         
-                        VStack{
-                            // Payment type
-                            ZStack(alignment: .leading) {
-                               if payment.isEmpty {
-                                   Text("Payment Type ")
-                                       .fontWeight(.bold)
-                                       .foregroundColor(.gray)
-                                       .font(.system(size: 18))
-                                       .padding(.vertical, 5.0)
-                               }
-                            TextField(" ", text: $payment)
-                                .font(.system(size: 18, weight: .bold))
-                                .multilineTextAlignment(.leading)
-                                .padding(.vertical, 5.0)
-                                
+                        ZStack(alignment: .leading) {
+                            List {
+                                VStack {
+                                    if myAccounts.count > 0 {
+                                        ForEach(0...myAccounts.count-1, id: \.self) {ippp in
+                                            Text(self.myAccounts[ippp].bank + " " + self.myAccounts[ippp].mask)
+                                        }
+                                    }
+                                }
                             }
-   
-                         }
+                        }
                     }
                 }
                 .padding(22)
@@ -216,7 +210,44 @@ struct SendView: View {
             }).padding()
             }
             Spacer();
-        }.padding()
+        }
+        .padding()
+    }
+    
+    func getAccounts() {
+        print("here")
+        let userPoolId:String = "GiftApp"
+        let pool = AWSCognitoIdentityUserPool(forKey: userPoolId)
+        let user = pool.currentUser()
+        let session = user!.getSession()
+        session.continueOnSuccessWith(block: { (task) -> () in
+            let taskSession = task.result!
+            let token = taskSession.idToken?.tokenString
+            let unwrappedToken = token!
+            
+            let params = ["user": user!.username!] as Dictionary<String, Any>
+            var request = URLRequest(url: URL(string: "https://cy6zpsazm2.execute-api.us-east-2.amazonaws.com/default/GetAccounts")!)
+            
+            request.httpMethod = "POST"
+            request.httpBody = try? JSONSerialization.data(withJSONObject: params, options: [])
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.addValue("oyKQGbEcWa1pRxMLHPi8EaaZJShizOZd6MQJZHga", forHTTPHeaderField: "x-api-key")
+            request.setValue(unwrappedToken, forHTTPHeaderField: "Authorization")
+            
+            let session = URLSession.shared
+            let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
+                if data != nil{
+                    print(data!)
+                    let jsonDecoder = JSONDecoder()
+                    do {
+                        self.myAccounts = try jsonDecoder.decode(Array<Account>.self, from: data!)
+                    } catch {
+                        print(error)
+                    }
+                }
+            })
+        task.resume()
+        })
     }
     
     func sendGift() {
@@ -266,8 +297,17 @@ struct SendView: View {
             task.resume()
         })
     }
-
 }
+
+public struct Account : Codable {
+    public let bank:String
+    public let accountId:String
+    public let accountMask:String
+    public let accountName:String
+    public let accountType:String
+    public let accountSubtype:String
+}
+
 struct SendView_Previews: PreviewProvider {
     static var previews: some View {
         SendView()
