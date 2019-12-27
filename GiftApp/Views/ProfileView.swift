@@ -84,10 +84,33 @@ struct ProfileView: View {
                 .background(Color(red: 209/255, green: 166/255, blue: 255/255, opacity: 1))
                 .cornerRadius(20)
                     .padding([.leading, .bottom, .trailing])
+                
+                // Log out
+                HStack {
+                    Spacer()
+                    Button(action: logout, label: {
+                        Text("logout")
+                          .fontWeight(.bold)
+                          .font(.headline)
+                          .padding()
+                          .foregroundColor(.white)
+                    })
+                    Spacer()
+                }
+                .background(Color(red: 209/255, green: 166/255, blue: 255/255, opacity: 1))
+                .cornerRadius(20)
+                    .padding([.leading, .bottom, .trailing])
             }
             Spacer()
         }
         .padding()
+    }
+    
+    func logout () {
+        let userPoolId:String = "GiftApp"
+        let pool = AWSCognitoIdentityUserPool(forKey: userPoolId)
+        pool.clearAll()
+        globalVariables.loggedIn = false
     }
 }
 
