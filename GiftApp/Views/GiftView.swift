@@ -57,6 +57,6 @@ struct GiftView: View {
 
 struct GiftView_Previews: PreviewProvider {
     static var previews: some View {
-        GiftView(gift: Gift(fromId: "+13035147424", vendor: "Chipotle", caption: "Tacos", remainingBalance: "10.00"))
+        GiftView(gift: Gift(id: 10, fromId: "+13035147424", vendor: "Chipotle", caption: "Tacos", remainingBalance: "10.00"))
     }
 }

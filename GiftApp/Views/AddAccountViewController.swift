@@ -13,6 +13,7 @@ import LinkKit
 import AWSCognitoIdentityProvider
 
 struct AddAccountViewController: UIViewControllerRepresentable {
+    @EnvironmentObject var globalVariables : GlobalVariables
     
     @Environment(\.presentationMode)
     var presentationMode
@@ -31,60 +32,41 @@ struct AddAccountViewController: UIViewControllerRepresentable {
     
     class Coordinator: NSObject, PLKPlaidLinkViewDelegate {
         @Binding var presentationMode: PresentationMode
-        var phone = ""
+        var parent : AddAccountViewController
         
         func linkViewController(_ linkViewController: PLKPlaidLinkViewController, didSucceedWithPublicToken publicToken: String, metadata: [String : Any]?) {
             print("Successfully linked account!\npublicToken:\(publicToken)\nmetadata: \(metadata ?? [:])")
             let institution = metadata!["institution"] as! [String : Any]
             let bankName = institution["name"]
-            
             let accounts = metadata!["accounts"] as! [NSArray]
             
-            let userPoolId:String = "GiftApp"
-            let pool = AWSCognitoIdentityUserPool(forKey: userPoolId)
-            let user = pool.currentUser()
-            user!.getDetails().continueOnSuccessWith(block: { (attrTask) -> Any? in
-                let taskAttributes = attrTask.result!
-                let attributes = taskAttributes.userAttributes
-                
-                for attribute in attributes! {
-                    print(attribute.name!, attribute.value!)
-                    if attribute.name == "phone_number" {
-                        self.phone = attribute.value!
-                    }
+            
+            let params = ["username":parent.globalVariables.userName, "phone":parent.globalVariables.phoneNumber, "bankName":bankName!, "accessToken":publicToken, "accounts":accounts] as Dictionary<String, Any>
+            var request = URLRequest(url: URL(string: "https://v1dv1bik8f.execute-api.us-east-2.amazonaws.com/default/AddUpdateAccount")!)
+            
+            request.httpMethod = "POST"
+            request.httpBody = try? JSONSerialization.data(withJSONObject: params, options: [])
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.addValue("0QsmVHhynj3lR4Y4V6QdY3Igckgen1EV8UZMrXXN", forHTTPHeaderField: "x-api-key")
+            request.setValue(parent.globalVariables.sessionToken, forHTTPHeaderField: "Authorization")
+            
+            let session = URLSession.shared
+            let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
+                if data != nil{
+                    print(data!)
                 }
                 
-                return user!.getSession()
-            }).continueOnSuccessWith(block: { (task) -> () in
-                let taskSession = task.result! as! AWSCognitoIdentityUserSession
-                let token = taskSession.idToken?.tokenString
-                let unwrappedToken = token!
+                if response != nil{
+                    print(response!)
+                }
                 
-                let params = ["username": user!.username!, "phone":self.phone, "bankName":bankName!, "accessToken":publicToken, "accounts":accounts] as Dictionary<String, Any>
-                var request = URLRequest(url: URL(string: "https://v1dv1bik8f.execute-api.us-east-2.amazonaws.com/default/AddUpdateAccount")!)
-                
-                request.httpMethod = "POST"
-                request.httpBody = try? JSONSerialization.data(withJSONObject: params, options: [])
-                request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-                request.addValue("0QsmVHhynj3lR4Y4V6QdY3Igckgen1EV8UZMrXXN", forHTTPHeaderField: "x-api-key")
-                request.setValue(unwrappedToken, forHTTPHeaderField: "Authorization")
-                
-                let session = URLSession.shared
-                let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
-                    if data != nil{
-                        print(data!)
-                    }
-                    
-                    if response != nil{
-                        print(response!)
-                    }
-                    
-                    if error != nil{
-                        print(error!)
-                    }
-                })
-                task.resume()
+                if error != nil{
+                    print(error!)
+                }
             })
+            task.resume()
+            
+            // TODO: add accounts to global variable
             
             presentationMode.dismiss()
         }
@@ -95,6 +77,7 @@ struct AddAccountViewController: UIViewControllerRepresentable {
         }
 
         init(_ addAccountViewController: AddAccountViewController, presentationMode: Binding<PresentationMode>) {
+            parent = addAccountViewController
             _presentationMode = presentationMode
         }
     }

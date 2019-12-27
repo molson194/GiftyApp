@@ -9,9 +9,10 @@
 import SwiftUI
 
 struct AddCardView: View {
+    @EnvironmentObject var globalVariables : GlobalVariables
     var body: some View {
         VStack{
-        AddAccountViewController()
+        AddAccountViewController().environmentObject(globalVariables)
             .navigationBarTitle("")
             .navigationBarHidden(true)
         }
@@ -20,6 +21,6 @@ struct AddCardView: View {
 
 struct AddCardView_Previews: PreviewProvider {
     static var previews: some View {
-        AddCardView()
+        AddCardView().environmentObject(GlobalVariables())
     }
 }

@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct WelcomeView: View {
-    @EnvironmentObject var userStatus : UserStatus
+    @EnvironmentObject var globalVariables : GlobalVariables
     var body: some View {
         
         NavigationView {
@@ -41,7 +41,7 @@ struct WelcomeView: View {
                 HStack{
 
                     // Sign Up
-                    NavigationLink(destination: SignupView().environmentObject(userStatus)) {
+                    NavigationLink(destination: SignupView().environmentObject(globalVariables)) {
                         Text("sign up!")
                             .font(.headline)
                             .padding()
@@ -52,7 +52,7 @@ struct WelcomeView: View {
                         .padding([.top, .leading, .bottom])
                     
                     // Log In
-                    NavigationLink(destination: LoginView().environmentObject(userStatus)) {
+                    NavigationLink(destination: LoginView().environmentObject(globalVariables)) {
                         Text("I have an account :)")
                             .font(.headline)
                             .padding()
@@ -75,6 +75,6 @@ struct WelcomeView: View {
 
 struct WelcomeView_Previews: PreviewProvider {
     static var previews: some View {
-        WelcomeView().environmentObject(UserStatus())
+        WelcomeView().environmentObject(GlobalVariables())
     }
 }

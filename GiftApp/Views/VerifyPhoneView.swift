@@ -13,7 +13,7 @@ struct VerifyPhoneView: View {
     var phoneNumber: String
     var password: String
     @State var code: String = ""
-    @EnvironmentObject var userStatus : UserStatus
+    @EnvironmentObject var globalVariables : GlobalVariables
     
     var body: some View {
     
@@ -72,7 +72,8 @@ struct VerifyPhoneView: View {
                         user.confirmSignUp(self.code).continueOnSuccessWith { (task) -> (AWSTask<AWSCognitoIdentityUserSession>) in
                             return user.getSession(self.phoneNumber, password: self.password, validationData: nil)
                         }.continueOnSuccessWith(executor: AWSExecutor.mainThread(), block: { (task) -> () in
-                            self.userStatus.loggedIn = true
+                            // TODO: get rest of global variables
+                            self.globalVariables.loggedIn = true
                         })
                     }) {
                         Text("take me to my account :)")
@@ -93,6 +94,6 @@ struct VerifyPhoneView: View {
 
 struct VerifyPhoneView_Previews: PreviewProvider {
     static var previews: some View {
-        VerifyPhoneView(phoneNumber: "phone", password: "pass").environmentObject(UserStatus())
+        VerifyPhoneView(phoneNumber: "phone", password: "pass").environmentObject(GlobalVariables())
     }
 }

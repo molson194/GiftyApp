@@ -14,7 +14,7 @@ struct SignupView : View {
     @State var phone: String = ""
     @State var password: String = ""
     @State var signupSuccessful = false
-    @EnvironmentObject var userStatus : UserStatus
+    @EnvironmentObject var globalVariables : GlobalVariables
     
     var body: some View {
         
@@ -82,7 +82,7 @@ struct SignupView : View {
                      .foregroundColor(Color(red: 209/255, green: 166/255, blue: 255/255, opacity: 1.0))
                 
                 // Submit
-                NavigationLink(destination: VerifyPhoneView(phoneNumber: phone, password: password).environmentObject(userStatus), isActive: self.$signupSuccessful) {
+                NavigationLink(destination: VerifyPhoneView(phoneNumber: phone, password: password).environmentObject(globalVariables), isActive: self.$signupSuccessful) {
                     Button(action: signup) {
                         Text("send verification code")
                         .font(.headline)
@@ -120,6 +120,6 @@ struct SignupView : View {
 
 struct SignupView_Previews: PreviewProvider {
     static var previews: some View {
-        SignupView().environmentObject(UserStatus())
+        SignupView().environmentObject(GlobalVariables())
     }
 }

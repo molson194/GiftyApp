@@ -12,7 +12,7 @@ import AWSCognitoIdentityProvider
 struct LoginView: View {
     @State var phone: String = ""
     @State var password: String = ""
-    @EnvironmentObject var userStatus : UserStatus
+    @EnvironmentObject var globalVariables : GlobalVariables
     
     var body: some View {
         
@@ -83,14 +83,16 @@ struct LoginView: View {
             print("user session is: \(String(describing: task.result))")
             print(user.username!)
             print(user.confirmedStatus)
-            self.userStatus.loggedIn = true
+            
+            // TODO: get rest of global variables
+            self.globalVariables.loggedIn = true
         })
     }
 }
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView().environmentObject(UserStatus())
+        LoginView().environmentObject(GlobalVariables())
         
     }
 }

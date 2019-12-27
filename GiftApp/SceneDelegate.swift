@@ -21,31 +21,115 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         // Create the SwiftUI view that provides the window contents.
         
+        let globalVariables = GlobalVariables()
+        let group = DispatchGroup()
+        
         let userPoolId:String = "GiftApp"
         let pool = AWSCognitoIdentityUserPool(forKey: userPoolId)
         //pool.clearAll()
-        let a = pool.currentUser()
-        if a?.username != nil {
-            let user = a!
-            user.getSession().continueWith(executor: AWSExecutor.mainThread()) { (task) -> () in
+        let user = pool.currentUser()
+        if user != nil {
+            
+            // GLOBAL VARIABLES: get basic user info first
+            globalVariables.userName = user!.username!
+            group.enter()
+            user!.getSession().continueWith(block: { (task) -> () in
                 if let error = task.error {
-                    print("Error:\(error)")
+                    print("Error:\(error)") // TODO: push could not sign in to user
                 } else {
-                    print("user session is: \(String(describing: task.result))")
-                    print(user.username!);
-                    print(user.confirmedStatus);
-                    self.presentView(scene, loggedIn: user.isSignedIn);
+                    globalVariables.sessionToken = task.result!.idToken!.tokenString
+                    globalVariables.loggedIn = true
                 }
-            }
-        } else {
-            presentView(scene, loggedIn: false)
+                group.leave()
+            })
+            
+            group.wait()
+            
+            // GLOBAL VARIABLES: get account balance, user cards, and user phone number after verify user
+            let params1 = ["userId": globalVariables.userName] as Dictionary<String, Any>
+            var request1 = URLRequest(url: URL(string: "https://3dyfpu69cg.execute-api.us-east-2.amazonaws.com/default/GetBalance")!)
+            
+            request1.httpMethod = "POST"
+            request1.httpBody = try? JSONSerialization.data(withJSONObject: params1, options: [])
+            request1.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request1.addValue("IZNFK8M0xK9Q8qCEqJyBL5vncsDcajIN7PI2Ojhx", forHTTPHeaderField: "x-api-key")
+            request1.setValue(globalVariables.sessionToken, forHTTPHeaderField: "Authorization")
+            
+            let session1 = URLSession.shared
+            
+            group.enter()
+            let task1 = session1.dataTask(with: request1, completionHandler: { data, response, error -> Void in
+                if data != nil{
+                    print(data!)
+                    let jsonDecoder = JSONDecoder()
+                    do {
+                        globalVariables.balance = try jsonDecoder.decode(Double.self, from: data!)
+                    } catch {
+                        print(error)
+                    }
+                }
+                
+                if response != nil{
+                    print(response!)
+                }
+                
+                if error != nil{
+                    print(error!)
+                }
+                group.leave()
+            })
+            task1.resume()
+            
+            let params2 = ["user": user!.username!] as Dictionary<String, Any>
+            var request2 = URLRequest(url: URL(string: "https://cy6zpsazm2.execute-api.us-east-2.amazonaws.com/default/GetAccounts")!)
+            
+            request2.httpMethod = "POST"
+            request2.httpBody = try? JSONSerialization.data(withJSONObject: params2, options: [])
+            request2.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request2.addValue("oyKQGbEcWa1pRxMLHPi8EaaZJShizOZd6MQJZHga", forHTTPHeaderField: "x-api-key")
+            request2.setValue(globalVariables.sessionToken, forHTTPHeaderField: "Authorization")
+            
+            let session2 = URLSession.shared
+            group.enter()
+            let task2 = session2.dataTask(with: request2, completionHandler: { data, response, error -> Void in
+                if data != nil{
+                    print(String(data: data!, encoding:String.Encoding.utf8)!)
+                    let jsonDecoder = JSONDecoder()
+                    do {
+                        globalVariables.accounts = try jsonDecoder.decode(Array<Account>.self, from: data!)
+                    } catch {
+                        print(error)
+                    }
+                }
+                group.leave()
+            })
+            task2.resume()
+            
+            group.enter()
+            user!.getDetails().continueWith(block: { (task) -> () in
+                if let error = task.error {
+                    print("Error:\(error)") // TODO: push could not get phone number to user
+                } else {
+                    let taskAttributes = task.result!
+                    let attributes = taskAttributes.userAttributes
+                    
+                    for attribute in attributes! {
+                        if attribute.name == "phone_number" {
+                            globalVariables.phoneNumber = attribute.value!
+                        }
+                    }
+                }
+                group.leave()
+            })
+        
         }
+        
+        group.wait()
+        self.presentView(scene, globalVariables: globalVariables);
     }
     
-    func presentView(_ scene: UIScene, loggedIn: Bool) {
-        let userStatus = UserStatus()
-        userStatus.loggedIn = loggedIn
-        let rootView = RootView().environmentObject(userStatus)
+    func presentView(_ scene: UIScene, globalVariables: GlobalVariables) {
+        let rootView = RootView().environmentObject(globalVariables)
         
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {

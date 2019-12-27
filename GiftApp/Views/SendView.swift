@@ -15,8 +15,7 @@ struct SendView: View {
     @State private var amount: String = ""
     @State private var comment: String = ""
     @State private var payment: String = ""
-    @State private var fromId: String = ""
-    @State private var myAccounts: Array<Account> = []
+    @EnvironmentObject var globalVariables : GlobalVariables
     var body: some View {
         
         VStack {
@@ -175,10 +174,8 @@ struct SendView: View {
                         ZStack(alignment: .leading) {
                             List {
                                 VStack {
-                                    if myAccounts.count > 0 {
-                                        ForEach(0...myAccounts.count-1, id: \.self) {ippp in
-                                            Text(self.myAccounts[ippp].bank + " " + self.myAccounts[ippp].accountMask)
-                                        }
+                                    ForEach(globalVariables.accounts, id: \.accountId) {account in
+                                        Text(account.bank + " " + account.accountMask)
                                     }
                                 }
                             }
@@ -193,7 +190,7 @@ struct SendView: View {
                
             // Button
         
-            if !payment.isEmpty && !comment.isEmpty && !vendor.isEmpty && !amount.isEmpty && !friend.isEmpty{
+            if !comment.isEmpty && !vendor.isEmpty && !amount.isEmpty && !friend.isEmpty{
             Button(action: sendGift, label: {
                 HStack {
                     Spacer()
@@ -212,91 +209,34 @@ struct SendView: View {
             Spacer();
         }
         .padding()
-        .onAppear(perform: getAccounts)
-    }
-    
-    func getAccounts() {
-        print("here")
-        let userPoolId:String = "GiftApp"
-        let pool = AWSCognitoIdentityUserPool(forKey: userPoolId)
-        let user = pool.currentUser()
-        let session = user!.getSession()
-        session.continueOnSuccessWith(block: { (task) -> () in
-            let taskSession = task.result!
-            let token = taskSession.idToken?.tokenString
-            let unwrappedToken = token!
-            
-            let params = ["user": user!.username!] as Dictionary<String, Any>
-            var request = URLRequest(url: URL(string: "https://cy6zpsazm2.execute-api.us-east-2.amazonaws.com/default/GetAccounts")!)
-            
-            request.httpMethod = "POST"
-            request.httpBody = try? JSONSerialization.data(withJSONObject: params, options: [])
-            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-            request.addValue("oyKQGbEcWa1pRxMLHPi8EaaZJShizOZd6MQJZHga", forHTTPHeaderField: "x-api-key")
-            request.setValue(unwrappedToken, forHTTPHeaderField: "Authorization")
-            
-            let session = URLSession.shared
-            let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
-                if data != nil{
-                    print(String(data: data!, encoding:String.Encoding.utf8)!)
-                    let jsonDecoder = JSONDecoder()
-                    do {
-                        self.myAccounts = try jsonDecoder.decode(Array<Account>.self, from: data!)
-                    } catch {
-                        print(error)
-                    }
-                }
-            })
-        task.resume()
-        })
     }
     
     func sendGift() {
+        //TODO: update balance global variable if sent from balance
+        let params = ["fromId": globalVariables.phoneNumber, "toId":self.friend, "paymentId":self.payment, "vendor":self.vendor, "caption": self.comment, "amount": Float(self.amount)!] as Dictionary<String, Any>
+        var request = URLRequest(url: URL(string: "https://ryg6sx9jzi.execute-api.us-east-2.amazonaws.com/default/SendGift")!)
         
-        let userPoolId:String = "GiftApp"
-        let pool = AWSCognitoIdentityUserPool(forKey: userPoolId)
-        pool.currentUser()?.getDetails().continueOnSuccessWith(block: { (attrTask) -> Any? in
-            let taskAttributes = attrTask.result!
-            let attributes = taskAttributes.userAttributes
-            
-            for attribute in attributes! {
-                print(attribute.name!, attribute.value!)
-                if attribute.name == "phone_number" {
-                    self.fromId = attribute.value!
-                }
+        request.httpMethod = "POST"
+        request.httpBody = try? JSONSerialization.data(withJSONObject: params, options: [])
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("hZHTGjfHuO9GuFzoC4Ht828j93sg0htR6VTk4W4n", forHTTPHeaderField: "x-api-key")
+        request.setValue(globalVariables.sessionToken, forHTTPHeaderField: "Authorization")
+        
+        let session = URLSession.shared
+        let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
+            if data != nil{
+                print(data!)
             }
             
-            return pool.currentUser()?.getSession()
-        }).continueOnSuccessWith(block: { (task) -> () in
-            let taskSession = task.result! as! AWSCognitoIdentityUserSession
-            let token = taskSession.idToken?.tokenString
-            let unwrappedToken = token!
+            if response != nil{
+                print(response!)
+            }
             
-            let params = ["fromId": self.fromId, "toId":self.friend, "paymentId":self.payment, "vendor":self.vendor, "caption": self.comment, "amount": Float(self.amount)!] as Dictionary<String, Any>
-            var request = URLRequest(url: URL(string: "https://ryg6sx9jzi.execute-api.us-east-2.amazonaws.com/default/SendGift")!)
-            
-            request.httpMethod = "POST"
-            request.httpBody = try? JSONSerialization.data(withJSONObject: params, options: [])
-            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-            request.addValue("hZHTGjfHuO9GuFzoC4Ht828j93sg0htR6VTk4W4n", forHTTPHeaderField: "x-api-key")
-            request.setValue(unwrappedToken, forHTTPHeaderField: "Authorization")
-            
-            let session = URLSession.shared
-            let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
-                if data != nil{
-                    print(data!)
-                }
-                
-                if response != nil{
-                    print(response!)
-                }
-                
-                if error != nil{
-                    print(error!)
-                }
-            })
-            task.resume()
+            if error != nil{
+                print(error!)
+            }
         })
+        task.resume()
     }
 }
 
@@ -311,6 +251,6 @@ public struct Account : Codable {
 
 struct SendView_Previews: PreviewProvider {
     static var previews: some View {
-        SendView()
+        SendView().environmentObject(GlobalVariables())
     }
 }

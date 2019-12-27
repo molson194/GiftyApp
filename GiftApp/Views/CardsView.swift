@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct CardsView: View {
+    @EnvironmentObject var globalVariables : GlobalVariables
     @State private var showingAlert = false
     
     var body: some View {
@@ -70,7 +71,7 @@ struct CardsView: View {
         }
     .padding()
         .navigationBarItems(trailing:
-            NavigationLink(destination: AddCardView()) {
+            NavigationLink(destination: AddCardView().environmentObject(globalVariables)) {
                 Text("Add Account")
             }
         )
@@ -79,6 +80,6 @@ struct CardsView: View {
 
 struct CardsView_Previews: PreviewProvider {
     static var previews: some View {
-        CardsView()
+        CardsView().environmentObject(GlobalVariables())
     }
 }

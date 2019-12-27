@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var globalVariables : GlobalVariables
     @State private var selection = 0
     
     
@@ -74,7 +75,7 @@ struct ContentView: View {
             
             // Send
             NavigationView{
-               SendView()
+               SendView().environmentObject(globalVariables)
                .navigationBarTitle(Text("Send"),displayMode: .inline)
                 .navigationBarItems(leading:
                     HStack {
@@ -99,7 +100,7 @@ struct ContentView: View {
             
             // Basket
             NavigationView{
-                BasketView()
+                BasketView().environmentObject(globalVariables)
                 .navigationBarTitle(Text("Basket"),displayMode: .inline)
                 .navigationBarItems(leading:
                     HStack {
@@ -124,7 +125,7 @@ struct ContentView: View {
             
             // Profile
             NavigationView {
-               ProfileView()
+               ProfileView().environmentObject(globalVariables)
                 .navigationBarTitle(Text("Profile"),displayMode: .inline)
                 .navigationBarItems(leading:
                     HStack {
@@ -153,6 +154,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView().environmentObject(GlobalVariables())
     }
 }
