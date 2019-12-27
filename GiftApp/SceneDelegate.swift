@@ -28,7 +28,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let pool = AWSCognitoIdentityUserPool(forKey: userPoolId)
         //pool.clearAll()
         let user = pool.currentUser()
-        if user != nil {
+        if user?.username != nil {
             
             // GLOBAL VARIABLES: get basic user info first
             globalVariables.userName = user!.username!
