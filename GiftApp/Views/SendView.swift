@@ -174,8 +174,26 @@ struct SendView: View {
                         ZStack(alignment: .leading) {
                             List {
                                 VStack {
+                                    HStack {
+                                        Text("Balance - $\(globalVariables.balance)")
+                                        Spacer()
+                                        if self.payment == "Balance" {
+                                            Image("first")
+                                        }
+                                    }
+                                    .padding()
+                                    .onTapGesture { self.payment = "Balance" }
+                                    
                                     ForEach(globalVariables.accounts, id: \.accountId) {account in
-                                        Text(account.bank + " " + account.accountMask)
+                                        HStack {
+                                            Text("\(account.bank)-\(account.accountMask)-\(account.accountSubtype)")
+                                            Spacer()
+                                            if self.payment == account.accountId {
+                                                Image("first")
+                                            }
+                                        }
+                                        .onTapGesture { self.payment = account.accountId }
+                                        .padding()
                                     }
                                 }
                             }
@@ -190,7 +208,7 @@ struct SendView: View {
                
             // Button
         
-            if !comment.isEmpty && !vendor.isEmpty && !amount.isEmpty && !friend.isEmpty{
+            if !payment.isEmpty && !comment.isEmpty && !vendor.isEmpty && !amount.isEmpty && !friend.isEmpty{
             Button(action: sendGift, label: {
                 HStack {
                     Spacer()
