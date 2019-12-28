@@ -8,8 +8,10 @@
 
 import SwiftUI
 import AWSCognitoIdentityProvider
+import Contacts
 
 struct SendView: View {
+    @State private var contacts = [Contact]()
     @State private var friend: String = ""
     @State private var vendor: String = ""
     @State private var amount: String = ""
@@ -84,10 +86,24 @@ struct SendView: View {
                                 .font(.system(size: 30, weight: .bold))
                                 .multilineTextAlignment(.center)
                             }
+                            .onAppear(perform: getAllContacts)
                         
+                        if friend.count != 12 { // TODO: Replace 12 with isValidPhoneNumber
+                            List {
+                                VStack {
+                                    ForEach(self.contacts, id:\.phoneNumber) { contact in
+                                        HStack {
+                                            Text("\(contact.firstName) \(contact.lastName)")
+                                            Spacer()
+                                        }
+                                        .onTapGesture { self.friend = contact.phoneNumber }
+                                    }
+                                }
+                            }
+                        }
                     }
                     
-                    if !friend.isEmpty {
+                    if friend.count == 12 {
                         // Second Row
                         
                         // Divider
@@ -256,6 +272,39 @@ struct SendView: View {
         })
         task.resume()
     }
+    
+    func getAllContacts() {
+        self.contacts = [Contact]()
+        let keys = [CNContactPhoneNumbersKey as CNKeyDescriptor, CNContactFormatter.descriptorForRequiredKeys(for: .fullName)]
+        let request = CNContactFetchRequest(keysToFetch: keys)
+        let contactStore = CNContactStore()
+
+        do {
+            try contactStore.enumerateContacts(with: request) {
+                (contact, stop) in
+                // Array containing all unified contacts from everywhere
+                if(contact.phoneNumbers.count > 0) {
+                    var unformattedPhone = contact.phoneNumbers[0].value.stringValue
+                    unformattedPhone = unformattedPhone.replacingOccurrences(of: "(", with: "")
+                    unformattedPhone = unformattedPhone.replacingOccurrences(of: ")", with: "")
+                    unformattedPhone = unformattedPhone.replacingOccurrences(of: " ", with: "")
+                    unformattedPhone = unformattedPhone.replacingOccurrences(of: "-", with: "")
+                    let newContact = Contact(firstName: contact.givenName, lastName: contact.familyName, phoneNumber: "+1\(unformattedPhone)")
+                    self.contacts.append(newContact)
+                }
+            }
+            print(self.contacts)
+        }
+        catch {
+            print("unable to fetch contacts")
+        }
+    }
+}
+
+public struct Contact {
+    public let firstName : String
+    public let lastName : String
+    public let phoneNumber : String
 }
 
 public struct Account : Codable {
