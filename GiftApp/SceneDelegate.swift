@@ -47,12 +47,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             
             // GLOBAL VARIABLES: get account balance, user cards, and user phone number after verify user
             let params1 = ["userId": globalVariables.userName] as Dictionary<String, Any>
-            var request1 = URLRequest(url: URL(string: "https://3dyfpu69cg.execute-api.us-east-2.amazonaws.com/default/GetBalance")!)
+            var request1 = URLRequest(url: URL(string: "https://o2yl8zqwjb.execute-api.us-east-2.amazonaws.com/default/GetBalance")!)
             
             request1.httpMethod = "POST"
             request1.httpBody = try? JSONSerialization.data(withJSONObject: params1, options: [])
             request1.addValue("application/json", forHTTPHeaderField: "Content-Type")
-            request1.addValue("IZNFK8M0xK9Q8qCEqJyBL5vncsDcajIN7PI2Ojhx", forHTTPHeaderField: "x-api-key")
+            request1.addValue("mroIKBuVeF2MZdhePl6iC2sHTnCudUBPgPeJCwCa", forHTTPHeaderField: "x-api-key")
             request1.setValue(globalVariables.sessionToken, forHTTPHeaderField: "Authorization")
             
             let session1 = URLSession.shared
@@ -81,12 +81,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             task1.resume()
             
             let params2 = ["user": user!.username!] as Dictionary<String, Any>
-            var request2 = URLRequest(url: URL(string: "https://cy6zpsazm2.execute-api.us-east-2.amazonaws.com/default/GetAccounts")!)
+            var request2 = URLRequest(url: URL(string: "https://o2yl8zqwjb.execute-api.us-east-2.amazonaws.com/default/GetAccounts")!)
             
             request2.httpMethod = "POST"
             request2.httpBody = try? JSONSerialization.data(withJSONObject: params2, options: [])
             request2.addValue("application/json", forHTTPHeaderField: "Content-Type")
-            request2.addValue("oyKQGbEcWa1pRxMLHPi8EaaZJShizOZd6MQJZHga", forHTTPHeaderField: "x-api-key")
+            request2.addValue("mroIKBuVeF2MZdhePl6iC2sHTnCudUBPgPeJCwCa", forHTTPHeaderField: "x-api-key")
             request2.setValue(globalVariables.sessionToken, forHTTPHeaderField: "Authorization")
             
             let session2 = URLSession.shared

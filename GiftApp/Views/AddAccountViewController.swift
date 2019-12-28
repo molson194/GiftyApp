@@ -42,12 +42,12 @@ struct AddAccountViewController: UIViewControllerRepresentable {
             
             
             let params = ["username":parent.globalVariables.userName, "phone":parent.globalVariables.phoneNumber, "bankName":bankName!, "accessToken":publicToken, "accounts":accounts] as Dictionary<String, Any>
-            var request = URLRequest(url: URL(string: "https://v1dv1bik8f.execute-api.us-east-2.amazonaws.com/default/AddUpdateAccount")!)
+            var request = URLRequest(url: URL(string: "https://o2yl8zqwjb.execute-api.us-east-2.amazonaws.com/default/AddUpdateAccount")!)
             
             request.httpMethod = "POST"
             request.httpBody = try? JSONSerialization.data(withJSONObject: params, options: [])
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-            request.addValue("0QsmVHhynj3lR4Y4V6QdY3Igckgen1EV8UZMrXXN", forHTTPHeaderField: "x-api-key")
+            request.addValue("mroIKBuVeF2MZdhePl6iC2sHTnCudUBPgPeJCwCa", forHTTPHeaderField: "x-api-key")
             request.setValue(parent.globalVariables.sessionToken, forHTTPHeaderField: "Authorization")
             
             let session = URLSession.shared
