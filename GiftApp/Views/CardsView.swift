@@ -10,66 +10,31 @@ import SwiftUI
 
 struct CardsView: View {
     @EnvironmentObject var globalVariables : GlobalVariables
-    @State private var showingAlert = false
     
     var body: some View {
         VStack {
-            
-            // Information Bar
-            VStack {
             HStack {
-                
-             Image(systemName: "info.circle.fill")
-               .resizable()
-               .frame(width: 30.0, height: 30.0)
-                
-                
+            
+                Image(systemName: "info.circle.fill")
+                .resizable()
+                .frame(width: 30.0, height: 30.0)
+
+
                 Text("Banks and credit cards can be used to validate purchases. Cards have more processing fees.")
                 Spacer()
-            }.padding()
-            
-            .background(Color.white)
             }
+            .padding()
+            .background(Color.white)
             .cornerRadius(20)
             .shadow(color: Color.gray,radius: 4, x: 0, y: 1)
             .padding(.bottom)
             
-            // Main Card
-            VStack {
-                
-                // Profile Image and Name
-                
-                    HStack {
-                        
-                        
-                        Text("Chase")
-                            .font(.headline)
-                            .fontWeight(.bold)
-                            .padding()
-                        Spacer()
-                   
-                }.background(Color(red: 255/255, green: 255/255, blue: 255/255, opacity: 1))
-                      
-                // Balance
-                HStack{
-                    
-                    Text("Bank Account")
-                        .font(.headline)
-                        .fontWeight(.light)
-                        .padding()
-                    Spacer()
-                    Text("Delete")
-                    .font(.headline)
-                        .fontWeight(.light)
-                    .padding()
-                }
-                .background(Color(red: 220/255, green: 220/255, blue: 220/255, opacity: 1))
+            ForEach(globalVariables.accounts, id: \.accountId) { account in
+                CardView(bankName: account.bank, accountName: account.accountName, accountMask: account.accountMask)
             }
-            .cornerRadius(20)
-            .shadow(radius: 3, x: 0, y: 0)
             Spacer()
         }
-    .padding()
+        .padding()
         .navigationBarItems(trailing:
             NavigationLink(destination: AddCardView().environmentObject(globalVariables)) {
                 Text("Add Account")

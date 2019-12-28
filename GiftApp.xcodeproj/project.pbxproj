@@ -25,6 +25,7 @@
 		F03597322390AC72008EF87C /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03597312390AC72008EF87C /* WelcomeView.swift */; };
 		F03597342390BFA3008EF87C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03597332390BFA3008EF87C /* LoginView.swift */; };
 		F0A21860239F6C67005591B4 /* AddCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A2185F239F6C67005591B4 /* AddCardView.swift */; };
+		F0ADF52623B7C8D800B9690E /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0ADF52523B7C8D800B9690E /* CardView.swift */; };
 		F0BCE7492392282000A851C3 /* VerifyPhoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0BCE7482392282000A851C3 /* VerifyPhoneView.swift */; };
 		F0D17AAA23B1921700AD91BC /* AddAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D17AA923B1921700AD91BC /* AddAccountViewController.swift */; };
 		F0FDD79F239E0D5500E1233A /* BankTransferView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FDD79E239E0D5500E1233A /* BankTransferView.swift */; };
@@ -54,6 +55,7 @@
 		F03597312390AC72008EF87C /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		F03597332390BFA3008EF87C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		F0A2185F239F6C67005591B4 /* AddCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardView.swift; sourceTree = "<group>"; };
+		F0ADF52523B7C8D800B9690E /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		F0BCE7482392282000A851C3 /* VerifyPhoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyPhoneView.swift; sourceTree = "<group>"; };
 		F0D17AA923B1921700AD91BC /* AddAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAccountViewController.swift; sourceTree = "<group>"; };
 		F0FDD79E239E0D5500E1233A /* BankTransferView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankTransferView.swift; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 				F0358744239DA81800989704 /* GiftView.swift */,
 				F0FDD79E239E0D5500E1233A /* BankTransferView.swift */,
 				F0FDD7A0239E0D9100E1233A /* CardsView.swift */,
+				F0ADF52523B7C8D800B9690E /* CardView.swift */,
 				F0A2185F239F6C67005591B4 /* AddCardView.swift */,
 				F00FEF8E23A0B12C00A8D6BF /* RootView.swift */,
 				F0D17AA923B1921700AD91BC /* AddAccountViewController.swift */,
@@ -292,6 +295,7 @@
 				F0BCE7492392282000A851C3 /* VerifyPhoneView.swift in Sources */,
 				F0A21860239F6C67005591B4 /* AddCardView.swift in Sources */,
 				F0FDD79F239E0D5500E1233A /* BankTransferView.swift in Sources */,
+				F0ADF52623B7C8D800B9690E /* CardView.swift in Sources */,
 				CB9B5A61239375CD009043F2 /* PromosView.swift in Sources */,
 				F0358745239DA81800989704 /* GiftView.swift in Sources */,
 				F00FEF8F23A0B12C00A8D6BF /* RootView.swift in Sources */,
