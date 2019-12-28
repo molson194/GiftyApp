@@ -25,7 +25,7 @@ struct BasketView: View {
     }
     
     func getGifts() {
-        let params = ["phoneNumber": globalVariables.phoneNumber] as Dictionary<String, Any>
+        let params = ["user": globalVariables.userName] as Dictionary<String, Any>
         var request = URLRequest(url: URL(string: "https://o2yl8zqwjb.execute-api.us-east-2.amazonaws.com/default/GetGifts")!)
         
         request.httpMethod = "POST"
