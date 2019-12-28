@@ -17,16 +17,10 @@ struct PromosView: View {
                 .padding()
                 .multilineTextAlignment(.center)
                 
-            Text("just smile and wave boys.")
+            Text("but something cool is coming soon.")
                 .font(.title)
                 .fontWeight(.medium)
                 .padding(.horizontal)
-                .multilineTextAlignment(.center)
-            
-            Text("smile and wave...")
-                .font(.title)
-                .fontWeight(.medium)
-                .padding()
                 .multilineTextAlignment(.center)
             
             Image("avocado")

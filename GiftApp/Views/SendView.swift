@@ -289,11 +289,11 @@ struct SendView: View {
                     unformattedPhone = unformattedPhone.replacingOccurrences(of: ")", with: "")
                     unformattedPhone = unformattedPhone.replacingOccurrences(of: " ", with: "")
                     unformattedPhone = unformattedPhone.replacingOccurrences(of: "-", with: "")
+                    unformattedPhone = unformattedPhone.replacingOccurrences(of: "+1", with: "")
                     let newContact = Contact(firstName: contact.givenName, lastName: contact.familyName, phoneNumber: "+1\(unformattedPhone)")
                     self.contacts.append(newContact)
                 }
             }
-            print(self.contacts)
         }
         catch {
             print("unable to fetch contacts")
