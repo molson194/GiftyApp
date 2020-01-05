@@ -8,13 +8,17 @@
 
 import UIKit
 import AWSCognitoIdentityProvider
+import AWSPinpoint
+import AWSMobileClient
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    var pinpoint: AWSPinpoint?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        AWSDDLog.sharedInstance.logLevel = .verbose
+        AWSDDLog.sharedInstance.logLevel = .warning
         AWSDDLog.add(AWSDDTTYLogger.sharedInstance)
         let clientId:String = "5ln82jet0mufet174t84u7m1c2"
         let poolId:String = "us-east-2_zQWcOqzWf"
@@ -23,10 +27,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let region:AWSRegionType = AWSRegionType.USEast2
         
         let serviceConfiguration = AWSServiceConfiguration(region: region, credentialsProvider: nil)
-        
         let cognitoConfiguration = AWSCognitoIdentityUserPoolConfiguration(clientId: clientId, clientSecret: clientSecret, poolId: poolId)
-        
         AWSCognitoIdentityUserPool.register(with: serviceConfiguration, userPoolConfiguration: cognitoConfiguration, forKey: userPoolId)
+        
+        let pool = AWSCognitoIdentityUserPool(forKey: userPoolId)
+        let credentialsProvider = AWSCognitoCredentialsProvider(regionType:region, identityPoolId:"us-east-2:d20d8fcb-4856-4c76-9a72-4122d4515922", identityProviderManager:pool)
+        
+        // Initialize Pinpoint
+        AWSServiceManager.default().defaultServiceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1, credentialsProvider: credentialsProvider)
+        let pinpointAppId = "bb5e579f87c34a5abf30677a1b766ce6"
+        let pinpointConfiguration = AWSPinpointConfiguration(appId: pinpointAppId, launchOptions: launchOptions)
+        
+        pinpoint = AWSPinpoint(configuration: pinpointConfiguration)
+        pinpoint?.sessionClient.startSession()
+
+        let event = pinpoint!.analyticsClient.createEvent(withEventType: "TestEvent")
+        pinpoint!.analyticsClient.record(event)
+        pinpoint!.analyticsClient.submitEvents()
+        
+        pinpoint?.sessionClient.stopSession()
         
         let appearance = UINavigationBarAppearance()
         appearance.configureWithDefaultBackground()

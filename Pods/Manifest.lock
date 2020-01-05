@@ -1,29 +1,43 @@
 PODS:
+  - AWSAuthCore (2.6.25):
+    - AWSCore (= 2.6.25)
   - AWSCognitoIdentityProvider (2.6.25):
     - AWSCognitoIdentityProviderASF (= 1.0.1)
     - AWSCore (= 2.6.25)
   - AWSCognitoIdentityProviderASF (1.0.1)
   - AWSCore (2.6.25)
+  - AWSMobileClient (2.6.25):
+    - AWSAuthCore (= 2.6.25)
+  - AWSPinpoint (2.6.25):
+    - AWSCore (= 2.6.25)
   - Plaid (1.1.10)
 
 DEPENDENCIES:
   - AWSCognitoIdentityProvider
   - AWSCore
+  - AWSMobileClient
+  - AWSPinpoint
   - Plaid
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
+    - AWSAuthCore
     - AWSCognitoIdentityProvider
     - AWSCognitoIdentityProviderASF
     - AWSCore
+    - AWSMobileClient
+    - AWSPinpoint
     - Plaid
 
 SPEC CHECKSUMS:
+  AWSAuthCore: ee797576ca94ef45b48cbf40bb113944791a09ab
   AWSCognitoIdentityProvider: 4a417e3f669c310253be85b0b0d884e144758761
   AWSCognitoIdentityProviderASF: f94f1a502e72ef3d0a1de93e10bf7a79c8698118
   AWSCore: 93ac57c361f6ff9c0749adf9404c4a1a1ecdaa2b
+  AWSMobileClient: 89f45bf39e73dedc2c9ce673146167e2009e8200
+  AWSPinpoint: 20ce4ece7e0726756e162a72311a4faa02564069
   Plaid: 12dcbdb591ad64f015162964f4b3b7fc2c5fb37d
 
-PODFILE CHECKSUM: a1afa0bda0b3b0cf827bc9230c7a9e234dbea626
+PODFILE CHECKSUM: 5d1173d185a6a7a6549a459914f748e1a3878bed
 
 COCOAPODS: 1.8.4

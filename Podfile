@@ -7,4 +7,6 @@ target 'GiftApp' do
     pod 'AWSCore'
     pod 'AWSCognitoIdentityProvider'
     pod 'Plaid'
+    pod  'AWSPinpoint'
+    pod  'AWSMobileClient'
 end
