@@ -63,6 +63,7 @@ struct VerifyPhoneView: View {
                 .background(Color(red: 1, green: 1, blue: 1, opacity: 0.95))
                 .cornerRadius(8)
                 .padding(.vertical)
+                .shadow(radius: 2, x: 0, y: 2)
                 
                     Button(action:{
                         let userPoolId:String = "GiftApp"
@@ -81,10 +82,9 @@ struct VerifyPhoneView: View {
                             .padding()
                         .foregroundColor(Color(red: 209/255, green: 166/255, blue: 255/255, opacity: 1.0))
                     }
-                
-                
                 .background(Color(red: 1, green: 1, blue: 1, opacity: 0.95))
                 .cornerRadius(8)
+                .shadow(radius: 2, x: 0, y: 2)
                 
             }.padding(.horizontal, 30.0)
         }

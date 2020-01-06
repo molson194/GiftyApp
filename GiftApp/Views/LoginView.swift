@@ -38,6 +38,7 @@ struct LoginView: View {
                     .padding()
                     .background(Color.white)
                     .cornerRadius(8)
+                        .keyboardType(.numberPad)
                     .foregroundColor(Color(red: 209/255, green: 166/255, blue: 255/255, opacity: 1.0))
                     
                     // Password
@@ -69,7 +70,9 @@ struct LoginView: View {
                         .background(Color(red: 1, green: 1, blue: 1, opacity: 0.95))
                         .cornerRadius(8)
                         .padding(.vertical)
+                    .shadow(radius: 2, x: 0, y: 2)
                     
+                    Spacer()
                     
                 }.padding(.horizontal, 30.0)
         }

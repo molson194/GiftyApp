@@ -50,6 +50,7 @@ struct WelcomeView: View {
                         .background(Color(red: 1, green: 1, blue: 1, opacity: 0.95))
                         .cornerRadius(8)
                         .padding([.top, .leading, .bottom])
+                    .shadow(radius: 2, x: 0, y: 2)
                     
                     // Log In
                     NavigationLink(destination: LoginView().environmentObject(globalVariables)) {
@@ -61,6 +62,7 @@ struct WelcomeView: View {
                         .background(Color(red: 1, green: 1, blue: 1, opacity: 0.2))
                         .cornerRadius(8)
                         .padding([.top, .bottom, .trailing])
+                        .shadow(radius: 1, x: 0, y: 2)
                         
                 }
                 
@@ -69,7 +71,10 @@ struct WelcomeView: View {
                                    
             }
         }
+            
+            .navigationBarTitle(Text(""),displayMode: .inline)
             }
+        .accentColor(.white)
     }
 }
 
