@@ -17,7 +17,7 @@ struct FeedView: View {
                 .padding()
                 .multilineTextAlignment(.center)
                 
-            Text("but sometimes we get tired,")
+            Text("but we get tired,")
                 .font(.title)
                 .fontWeight(.medium)
                 .padding(.horizontal)

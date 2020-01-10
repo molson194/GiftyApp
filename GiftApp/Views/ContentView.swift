@@ -29,17 +29,21 @@ struct ContentView: View {
                 .navigationBarTitle(Text("Promos"),displayMode: .inline)
                 .navigationBarItems(leading:
                     HStack {
-                        Image(systemName: "gift")
-                        .font(.title)
-                        
+                        NavigationLink(destination: ThankYouView().environmentObject(globalVariables)) {
+                            Image(systemName: "envelope.open")
+                                .font(.title)
+                                .foregroundColor(.black)
+                        }
                     }, trailing:
                     HStack {
-                        Image(systemName: "slider.horizontal.3")
-                        .font(.title)
-                        
+                        NavigationLink(destination: FAQsView().environmentObject(globalVariables)) {
+                            Image(systemName: "questionmark.circle")
+                                .font(.title)
+                                .foregroundColor(.black)
+                        }
                     }
                 )
-            }
+            }.accentColor(.black)
                 .tabItem {
                     VStack {
                         Image("promos")
@@ -54,17 +58,22 @@ struct ContentView: View {
                 .navigationBarTitle(Text("Feed"),displayMode: .inline)
                 .navigationBarItems(leading:
                     HStack {
-                        Image(systemName: "gift")
-                        .font(.title)
-                        
+                        NavigationLink(destination: ThankYouView().environmentObject(globalVariables)) {
+                            Image(systemName: "envelope.open")
+                                .font(.title)
+                                .foregroundColor(.black)
+                        }
                     }, trailing:
                     HStack {
-                        Image(systemName: "slider.horizontal.3")
-                        .font(.title)
+                        NavigationLink(destination: FAQsView().environmentObject(globalVariables)) {
+                            Image(systemName: "questionmark.circle")
+                                .font(.title)
+                                .foregroundColor(.black)
+                        }
                         
                     }
                 )
-            }
+            }.accentColor(.black)
                 .tabItem {
                     VStack {
                         Image("feed")
@@ -79,17 +88,23 @@ struct ContentView: View {
                .navigationBarTitle(Text("Send"),displayMode: .inline)
                 .navigationBarItems(leading:
                     HStack {
-                        Image(systemName: "gift")
-                        .font(.title)
+                        NavigationLink(destination: ThankYouView().environmentObject(globalVariables)) {
+                            Image(systemName: "envelope.open")
+                                .font(.title)
+                                .foregroundColor(.black)
+                        }
                         
                     }, trailing:
                     HStack {
-                        Image(systemName: "slider.horizontal.3")
-                        .font(.title)
+                        NavigationLink(destination: FAQsView().environmentObject(globalVariables)) {
+                            Image(systemName: "questionmark.circle")
+                                .font(.title)
+                                .foregroundColor(.black)
+                        }
                         
                     }
                 )
-            }
+            }.accentColor(.black)
                 .tabItem {
                     VStack {
                         Image("send")
@@ -104,17 +119,23 @@ struct ContentView: View {
                 .navigationBarTitle(Text("Basket"),displayMode: .inline)
                 .navigationBarItems(leading:
                     HStack {
-                        Image(systemName: "gift")
-                        .font(.title)
+                        NavigationLink(destination: ThankYouView().environmentObject(globalVariables)) {
+                            Image(systemName: "envelope.open")
+                                .font(.title)
+                                .foregroundColor(.black)
+                        }
                         
                     }, trailing:
                     HStack {
-                        Image(systemName: "slider.horizontal.3")
-                        .font(.title)
+                        NavigationLink(destination: FAQsView().environmentObject(globalVariables)) {
+                            Image(systemName: "questionmark.circle")
+                                .font(.title)
+                                .foregroundColor(.black)
+                        }
                         
                     }
                 )
-            }
+            }.accentColor(.black)
                 .tabItem {
                     VStack {
                         Image("basket")
@@ -129,13 +150,19 @@ struct ContentView: View {
                 .navigationBarTitle(Text("Profile"),displayMode: .inline)
                 .navigationBarItems(leading:
                     HStack {
-                        Image(systemName: "gift")
-                        .font(.title)
+                        NavigationLink(destination: ThankYouView().environmentObject(globalVariables)) {
+                            Image(systemName: "envelope.open")
+                                .font(.title)
+                                .foregroundColor(.black)
+                        }
                         
                     }, trailing:
                     HStack {
-                        Image(systemName: "slider.horizontal.3")
-                        .font(.title)
+                        NavigationLink(destination: FAQsView().environmentObject(globalVariables)) {
+                            Image(systemName: "questionmark.circle")
+                                .font(.title)
+                                .foregroundColor(.black)
+                        }
                         
                     }
                 )

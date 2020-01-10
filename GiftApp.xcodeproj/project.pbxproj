@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		CB42511E23AEEDF40069F211 /* GlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB42511D23AEEDF40069F211 /* GlobalVariables.swift */; };
+		CB5797C923C84D9E00977504 /* ThankYouView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB5797C823C84D9E00977504 /* ThankYouView.swift */; };
+		CB5797CB23C84F8100977504 /* FAQsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB5797CA23C84F8100977504 /* FAQsView.swift */; };
 		CB9B5A61239375CD009043F2 /* PromosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9B5A60239375CD009043F2 /* PromosView.swift */; };
 		CB9B5A6323937856009043F2 /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9B5A6223937856009043F2 /* FeedView.swift */; };
 		CB9B5A6523937886009043F2 /* SendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9B5A6423937886009043F2 /* SendView.swift */; };
@@ -36,6 +38,8 @@
 		2ED7926B38C947963EC8F1D4 /* Pods-GiftApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GiftApp.release.xcconfig"; path = "Target Support Files/Pods-GiftApp/Pods-GiftApp.release.xcconfig"; sourceTree = "<group>"; };
 		8E1C5E16143CB21F61EDD007 /* Pods_GiftApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GiftApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB42511D23AEEDF40069F211 /* GlobalVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalVariables.swift; sourceTree = "<group>"; };
+		CB5797C823C84D9E00977504 /* ThankYouView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThankYouView.swift; sourceTree = "<group>"; };
+		CB5797CA23C84F8100977504 /* FAQsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQsView.swift; sourceTree = "<group>"; };
 		CB9B5A60239375CD009043F2 /* PromosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromosView.swift; sourceTree = "<group>"; };
 		CB9B5A6223937856009043F2 /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
 		CB9B5A6423937886009043F2 /* SendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendView.swift; sourceTree = "<group>"; };
@@ -129,6 +133,8 @@
 			isa = PBXGroup;
 			children = (
 				F02218C623595BAA0097F5BB /* ContentView.swift */,
+				CB5797CA23C84F8100977504 /* FAQsView.swift */,
+				CB5797C823C84D9E00977504 /* ThankYouView.swift */,
 				CB9B5A6423937886009043F2 /* SendView.swift */,
 				CB9B5A6623937896009043F2 /* BasketView.swift */,
 				CB9B5A68239378A6009043F2 /* ProfileView.swift */,
@@ -285,6 +291,7 @@
 			files = (
 				CB9B5A6723937896009043F2 /* BasketView.swift in Sources */,
 				F03597342390BFA3008EF87C /* LoginView.swift in Sources */,
+				CB5797C923C84D9E00977504 /* ThankYouView.swift in Sources */,
 				F0D17AAA23B1921700AD91BC /* AddAccountViewController.swift in Sources */,
 				CB9B5A6323937856009043F2 /* FeedView.swift in Sources */,
 				F03597322390AC72008EF87C /* WelcomeView.swift in Sources */,
@@ -299,6 +306,7 @@
 				F0FDD79F239E0D5500E1233A /* BankTransferView.swift in Sources */,
 				F0ADF52623B7C8D800B9690E /* CardView.swift in Sources */,
 				CB9B5A61239375CD009043F2 /* PromosView.swift in Sources */,
+				CB5797CB23C84F8100977504 /* FAQsView.swift in Sources */,
 				F0358745239DA81800989704 /* GiftView.swift in Sources */,
 				F00FEF8F23A0B12C00A8D6BF /* RootView.swift in Sources */,
 				CB9B5A6523937886009043F2 /* SendView.swift in Sources */,

@@ -1,45 +1,47 @@
 //
-//  PromosView.swift
+//  ThankYouView.swift
 //  GiftApp
 //
-//  Created by Michael Olson on 11/30/19.
-//  Copyright © 2019 Molson. All rights reserved.
+//  Created by Michael Olson on 1/9/20.
+//  Copyright © 2020 Molson. All rights reserved.
 //
 
 import SwiftUI
 
-struct PromosView: View {
+struct ThankYouView: View {
     var body: some View {
         VStack {
-            Text("nothing to see here.")
+            Text("we're coding stuff")
                 .font(.title)
                 .fontWeight(.medium)
                 .padding()
                 .multilineTextAlignment(.center)
                 
-            Text("but something cool")
+            Text("to make it easier ")
                 .font(.title)
                 .fontWeight(.medium)
                 .padding(.horizontal)
                 .multilineTextAlignment(.center)
             
-            Text("is coming soon.")
+            Text("to say thank you!")
                 .font(.title)
                 .fontWeight(.medium)
                 .padding([.top, .leading, .trailing])
                 .multilineTextAlignment(.center)
             
-            Image("avocado")
-                .resizable()
-                .frame(width: 133.0, height: 150.0)
-            
+            Text("🍻☺️")
+                .font(.system(size: 75))
+                .fontWeight(.medium)
+                .padding([.top, .leading, .trailing])
+                .multilineTextAlignment(.center)
         }
-        .padding(.all)
+        .navigationBarTitle(Text("Thank Yous"),displayMode: .inline)
     }
+     
 }
 
-struct PromosView_Previews: PreviewProvider {
+struct ThankYouView_Previews: PreviewProvider {
     static var previews: some View {
-        PromosView()
+        ThankYouView()
     }
 }
