@@ -41,9 +41,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         pinpoint = AWSPinpoint(configuration: pinpointConfiguration)
         pinpoint?.sessionClient.startSession()
 
-        let event = pinpoint!.analyticsClient.createEvent(withEventType: "TestEvent")
-        pinpoint!.analyticsClient.record(event)
-        pinpoint!.analyticsClient.submitEvents()
+        // TODO: Add analytics events to app
+        //let event = pinpoint!.analyticsClient.createEvent(withEventType: "TestEvent")
+        //event.addAttribute("TestValue", forKey: "TestKey")
+        //event.addMetric(1, forKey: "TestMetric")
+        //let money = pinpoint!.analyticsClient.createVirtualMonetizationEvent(withProductId: "TestProduct", withItemPrice: 10.0, withQuantity: 1, withCurrency: "US")
+        //pinpoint!.analyticsClient.record(event)
+        //pinpoint!.analyticsClient.record(money)
+        //pinpoint!.analyticsClient.submitEvents()
         
         pinpoint?.sessionClient.stopSession()
         
