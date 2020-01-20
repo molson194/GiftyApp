@@ -24,11 +24,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let globalVariables = GlobalVariables()
         let group = DispatchGroup()
         
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        
         let userPoolId:String = "GiftApp"
         let pool = AWSCognitoIdentityUserPool(forKey: userPoolId)
         //pool.clearAll()
         let user = pool.currentUser()
         if user?.username != nil {
+            
+            let currentUserId = delegate.pinpoint?.targetingClient.currentEndpointProfile().user?.userId
+            if currentUserId != user!.username {
+                delegate.pinpoint?.targetingClient.currentEndpointProfile().user?.userId = user!.username
+                delegate.pinpoint?.targetingClient.updateEndpointProfile()
+                // TODO: upload device token
+            }
             
             // GLOBAL VARIABLES: get basic user info first
             globalVariables.userName = user!.username!

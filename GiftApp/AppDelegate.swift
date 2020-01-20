@@ -18,6 +18,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        UNUserNotificationCenter.current().requestAuthorization(options:[.badge, .alert, .sound]) { (granted, error) in
+            // TODO: Enable or disable features based on authorization.
+        }
+        UIApplication.shared.registerForRemoteNotifications()
+
+        
         AWSDDLog.sharedInstance.logLevel = .warning
         AWSDDLog.add(AWSDDTTYLogger.sharedInstance)
         let clientId:String = "5ln82jet0mufet174t84u7m1c2"
@@ -51,6 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //pinpoint!.analyticsClient.submitEvents()
         
         pinpoint?.sessionClient.stopSession()
+        print(pinpoint!.targetingClient.currentEndpointProfile().endpointId)
         
         let appearance = UINavigationBarAppearance()
         appearance.configureWithDefaultBackground()
@@ -73,5 +80,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the user discards a scene session.
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
+    }
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        token = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
+        print(token)
+        let defaults = UserDefaults.standard
+        defaults.set(token, forKey: "Token")
+        pinpoint!.notificationManager.interceptDidRegisterForRemoteNotifications(withDeviceToken: deviceToken)
+    }
+
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("failed to register for notifications")
+    }
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
+        if (application.applicationState == .active) {
+            print("notification received")
+        }
     }
 }

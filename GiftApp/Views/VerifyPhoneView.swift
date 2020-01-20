@@ -74,7 +74,42 @@ struct VerifyPhoneView: View {
                             return user.getSession(self.phoneNumber, password: self.password, validationData: nil)
                         }.continueOnSuccessWith(executor: AWSExecutor.mainThread(), block: { (task) -> () in
                             // TODO: get rest of global variables
-                            self.globalVariables.loggedIn = true
+                            
+                            let defaults = UserDefaults.standard
+                            let deviceToken = defaults.string(forKey: "Token") ?? ""
+                            print(deviceToken)
+                            
+                            if deviceToken != "" {
+                                // upload token, userid, phone number to database in cloud
+                                let params = ["user": user.username!, "token":deviceToken] as Dictionary<String, Any>
+                                var request = URLRequest(url: URL(string: "https://o2yl8zqwjb.execute-api.us-east-2.amazonaws.com/default/DeviceToken")!)
+                                
+                                request.httpMethod = "POST"
+                                request.httpBody = try? JSONSerialization.data(withJSONObject: params, options: [])
+                                request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+                                request.addValue("AvH4fxu8GSaYZ3vGxVSTka5uAcZYFq237ZER85Q5", forHTTPHeaderField: "x-api-key")
+                                request.setValue(task.result!.idToken!.tokenString, forHTTPHeaderField: "Authorization")
+                                
+                                let session = URLSession.shared
+                                let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
+                                    if data != nil{
+                                        print(data!)
+                                    }
+                                    
+                                    if response != nil{
+                                        print(response!)
+                                    }
+                                    
+                                    if error != nil{
+                                        print(error!)
+                                    }
+                                    
+                                    self.globalVariables.loggedIn = true
+                                })
+                                task.resume()
+                            } else {
+                                self.globalVariables.loggedIn = true
+                            }
                         })
                     }) {
                         Text("take me to my account :)")
