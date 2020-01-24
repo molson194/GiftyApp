@@ -53,7 +53,7 @@ struct LoginView: View {
                         
                     }
                     
-                    TextField("",text: $password)
+                    SecureField("",text: $password)
                     .padding()
                     .background(Color.white)
                     .cornerRadius(8)

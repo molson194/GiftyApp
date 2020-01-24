@@ -26,7 +26,7 @@ struct SignupView : View {
             .edgesIgnoringSafeArea(.vertical)
         
             VStack {
-                
+                 
                 // Name
                 HStack{
                     Text("name")
@@ -44,6 +44,7 @@ struct SignupView : View {
                     .background(Color.white)
                     .cornerRadius(8)
                     .foregroundColor(Color(red: 209/255, green: 166/255, blue: 255/255, opacity: 1.0))
+                    .accentColor(Color(red: 209/255, green: 166/255, blue: 255/255, opacity: 1.0))
                 
                 // Phone Number
                  HStack{
@@ -76,7 +77,7 @@ struct SignupView : View {
                      Spacer()
                  }
             
-                 TextField("", text: $password)
+                 SecureField("", text: $password)
                      .padding()
                      .background(Color.white)
                      .cornerRadius(8)
@@ -121,6 +122,59 @@ struct SignupView : View {
         }
     }
 }
+
+struct CustomTextField: UIViewRepresentable {
+
+    class Coordinator: NSObject, UITextFieldDelegate {
+
+        @Binding var text: String
+        var didBecomeFirstResponder = false
+
+        init(text: Binding<String>) {
+            _text = text
+        }
+
+        func textFieldDidChangeSelection(_ textField: UITextField) {
+            text = textField.text ?? ""
+        }
+
+    }
+
+    @Binding var text: String
+    var isFirstResponder: Bool = false
+
+    func makeUIView(context: UIViewRepresentableContext<CustomTextField>) -> UITextField {
+        let textField = UITextField(frame: .zero)
+        textField.delegate = context.coordinator
+        return textField
+    }
+
+    func makeCoordinator() -> CustomTextField.Coordinator {
+        return Coordinator(text: $text)
+    }
+
+    func updateUIView(_ uiView: UITextField, context: UIViewRepresentableContext<CustomTextField>) {
+        uiView.text = text
+        if isFirstResponder && !context.coordinator.didBecomeFirstResponder  {
+            uiView.becomeFirstResponder()
+            context.coordinator.didBecomeFirstResponder = true
+        }
+    }
+}
+
+struct ResponderTextField: UIViewRepresentable {
+
+    typealias TheUIView = UITextField
+    var isFirstResponder: Bool
+    var configuration = { (view: TheUIView) in }
+
+    func makeUIView(context: UIViewRepresentableContext<Self>) -> TheUIView { TheUIView() }
+    func updateUIView(_ uiView: TheUIView, context: UIViewRepresentableContext<Self>) {
+        _ = isFirstResponder ? uiView.becomeFirstResponder() : uiView.resignFirstResponder()
+        configuration(uiView)
+    }
+}
+
 
 struct SignupView_Previews: PreviewProvider {
     static var previews: some View {
