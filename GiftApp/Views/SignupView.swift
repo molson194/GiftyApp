@@ -12,7 +12,9 @@ import AWSCognitoIdentityProvider
 struct SignupView : View {
     @State var name: String = ""
     @State var phone: String = ""
+    @State var tempPhone: String = ""
     @State var password: String = ""
+    @State var phoneAlert = false
     @State var signupSuccessful = false
     @EnvironmentObject var globalVariables : GlobalVariables
     
@@ -29,59 +31,126 @@ struct SignupView : View {
                  
                 // Name
                 HStack{
-                    Text("name")
-                    .font(.body)
-                    .fontWeight(.bold)
-                    .foregroundColor(Color.white)
-                    .multilineTextAlignment(.leading)
-                    .padding(.leading)
-                    
+                    Text("Full Name")
+                        .font(.body)
+                        .fontWeight(.bold)
+                    Image(systemName: "person.circle" )
+                        .resizable()
+                        .frame(width: 20.0, height: 20.0)
                     Spacer()
                 }
+                    .foregroundColor(Color.white)
+                    .shadow(radius: 0.5)
            
-                TextField("", text: $name)
+                TextField("John Doe", text: $name)
                     .padding()
                     .background(Color.white)
                     .cornerRadius(8)
                     .foregroundColor(Color(red: 209/255, green: 166/255, blue: 255/255, opacity: 1.0))
                     .accentColor(Color(red: 209/255, green: 166/255, blue: 255/255, opacity: 1.0))
+                    .shadow(radius: 2, x: 0, y: 2)
                 
                 // Phone Number
-                 HStack{
-                     Text("phone number")
-                     .font(.body)
-                     .fontWeight(.bold)
-                     .foregroundColor(Color.white)
-                     .multilineTextAlignment(.leading)
-                     .padding([.top, .leading])
+                HStack{
+                    Text("Phone Number")
+                        .font(.body)
+                        .fontWeight(.bold)
+                    Image(systemName: "phone.circle" )
+                        .resizable()
+                        .frame(width: 20.0, height: 20.0)
+                    Spacer()
+                }
+                    .foregroundColor(Color.white)
+                    .shadow(radius: 0.5)
+                    .padding(.top)
+                
+                HStack {
+                   Text("+1")
+                    .padding()
+                    .background(Color.white)
+                    .cornerRadius(8)
+                    .foregroundColor(Color(red: 209/255, green: 166/255, blue: 255/255, opacity: 1.0))
                     
-                     Spacer()
-                 }
-            
-                 TextField("", text: $phone)
-                     .padding()
-                     .background(Color.white)
-                     .cornerRadius(8)
-                     .foregroundColor(Color(red: 209/255, green: 166/255, blue: 255/255, opacity: 1.0))
-                .keyboardType(.numberPad)
+                    TextField("123-456-7890", text: $tempPhone,
+                      onEditingChanged: { edit in
+                        
+                        
+                        if(self.tempPhone.count == 10) {
+                            self.phone = "+1" + self.tempPhone
+                            
+                            let p1 = self.tempPhone.index(self.tempPhone.startIndex, offsetBy: 0)
+                            let p2 = self.tempPhone.index(self.tempPhone.startIndex, offsetBy: 3)
+                            let p3 = self.tempPhone.index(self.tempPhone.startIndex, offsetBy: 3)
+                            let p4 = self.tempPhone.index(self.tempPhone.startIndex, offsetBy: 6)
+                            let p5 = self.tempPhone.index(self.tempPhone.startIndex, offsetBy: 6)
+                           
+                            let r1 = p1..<p2
+                            let r2 = p3..<p4
+                            let r3 = p5..<self.tempPhone.endIndex
+                            
+                            let part1 = self.tempPhone[r1]
+                            let part2 = self.tempPhone[r2]
+                            let part3 = self.tempPhone[r3]
+                            
+                            
+                            self.tempPhone = part1 + "-" + part2 + "-" + part3
+                            print(self.phone)
+                            self.phoneAlert = false
+                        } else {
+                            
+                            if (!(self.tempPhone.count == 0)) {
+                                self.phoneAlert = true
+                            }
+                        }
+                        
+                        
+                      },
+                      onCommit: {
+                        print("COMITTED!")
+                      })
+                              
+                              
+                              
+                    .padding()
+                    .background(Color.white)
+                    .cornerRadius(8)
+                    .foregroundColor(Color(red: 209/255, green: 166/255, blue: 255/255, opacity: 1.0))
+                    .accentColor(Color(red: 209/255, green: 166/255, blue: 255/255, opacity: 1.0))
+                    
+                    .keyboardType(.numberPad)
+                    
+                    
+                    
+                }.shadow(radius: 2, x: 0, y: 2)
+                
+                if(self.phoneAlert) {
+                    Text("YOOO")
+                }
+                
+                
+                 
                 
                 // Password
                  HStack{
-                     Text("password")
-                     .font(.body)
-                     .fontWeight(.bold)
-                     .foregroundColor(Color.white)
-                     .multilineTextAlignment(.leading)
-                     .padding([.top, .leading])
-                     
+                     Text("Password")
+                         .font(.body)
+                         .fontWeight(.bold)
+                     Image(systemName: "lock.circle" )
+                         .resizable()
+                         .frame(width: 20.0, height: 20.0)
                      Spacer()
                  }
+                    .shadow(radius: 0.5)
+                    .foregroundColor(Color.white)
+                    .padding(.top)
             
-                 SecureField("", text: $password)
-                     .padding()
-                     .background(Color.white)
-                     .cornerRadius(8)
-                     .foregroundColor(Color(red: 209/255, green: 166/255, blue: 255/255, opacity: 1.0))
+                 SecureField("8+ characters", text: $password)
+                        .padding()
+                        .background(Color.white)
+                        .cornerRadius(8)
+                        .foregroundColor(Color(red: 209/255, green: 166/255, blue: 255/255, opacity: 1.0))
+                        .accentColor(Color(red: 209/255, green: 166/255, blue: 255/255, opacity: 1.0))
+                        .shadow(radius: 2, x: 0, y: 2)
                 
                 // Submit
                 NavigationLink(destination: VerifyPhoneView(phoneNumber: phone, password: password).environmentObject(globalVariables), isActive: self.$signupSuccessful) {
@@ -98,10 +167,16 @@ struct SignupView : View {
                 .shadow(radius: 2, x: 0, y: 2)
                 
                 Spacer()
+            
+                
                 
             
-            }.padding(.horizontal, 30.0)
+            }
+                
+                .padding(.horizontal, 25)
+                .padding(.top)
         }
+        .navigationBarTitle(Text(""),displayMode: .inline)
     }
     
     func signup() {
@@ -120,58 +195,6 @@ struct SignupView : View {
         pool.signUp(phone, password: password, userAttributes: attributes, validationData: nil).continueOnSuccessWith { (task) -> () in
             self.signupSuccessful = true
         }
-    }
-}
-
-struct CustomTextField: UIViewRepresentable {
-
-    class Coordinator: NSObject, UITextFieldDelegate {
-
-        @Binding var text: String
-        var didBecomeFirstResponder = false
-
-        init(text: Binding<String>) {
-            _text = text
-        }
-
-        func textFieldDidChangeSelection(_ textField: UITextField) {
-            text = textField.text ?? ""
-        }
-
-    }
-
-    @Binding var text: String
-    var isFirstResponder: Bool = false
-
-    func makeUIView(context: UIViewRepresentableContext<CustomTextField>) -> UITextField {
-        let textField = UITextField(frame: .zero)
-        textField.delegate = context.coordinator
-        return textField
-    }
-
-    func makeCoordinator() -> CustomTextField.Coordinator {
-        return Coordinator(text: $text)
-    }
-
-    func updateUIView(_ uiView: UITextField, context: UIViewRepresentableContext<CustomTextField>) {
-        uiView.text = text
-        if isFirstResponder && !context.coordinator.didBecomeFirstResponder  {
-            uiView.becomeFirstResponder()
-            context.coordinator.didBecomeFirstResponder = true
-        }
-    }
-}
-
-struct ResponderTextField: UIViewRepresentable {
-
-    typealias TheUIView = UITextField
-    var isFirstResponder: Bool
-    var configuration = { (view: TheUIView) in }
-
-    func makeUIView(context: UIViewRepresentableContext<Self>) -> TheUIView { TheUIView() }
-    func updateUIView(_ uiView: TheUIView, context: UIViewRepresentableContext<Self>) {
-        _ = isFirstResponder ? uiView.becomeFirstResponder() : uiView.resignFirstResponder()
-        configuration(uiView)
     }
 }
 

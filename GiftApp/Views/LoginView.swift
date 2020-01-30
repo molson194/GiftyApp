@@ -30,16 +30,16 @@ struct LoginView: View {
                         .fontWeight(.bold)
                         .foregroundColor(Color.white)
                         .multilineTextAlignment(.leading)
-                        .padding(.leading)
                         Spacer()
                     }
                     
                     TextField("", text: $phone)
-                    .padding()
-                    .background(Color.white)
-                    .cornerRadius(8)
-                        .keyboardType(.numberPad)
-                    .foregroundColor(Color(red: 209/255, green: 166/255, blue: 255/255, opacity: 1.0))
+                        .padding()
+                        .background(Color.white)
+                        .cornerRadius(8)
+                            .keyboardType(.numberPad)
+                        .foregroundColor(Color(red: 209/255, green: 166/255, blue: 255/255, opacity: 1.0))
+                        .accentColor(Color(red: 209/255, green: 166/255, blue: 255/255, opacity: 1.0))
                     
                     // Password
                     HStack{
@@ -48,16 +48,17 @@ struct LoginView: View {
                         .fontWeight(.bold)
                         .foregroundColor(Color.white)
                         .multilineTextAlignment(.leading)
-                        .padding([.top, .leading])
+                        .padding(.top)
                         Spacer()
                         
                     }
                     
                     SecureField("",text: $password)
-                    .padding()
-                    .background(Color.white)
-                    .cornerRadius(8)
-                    .foregroundColor(Color(red: 209/255, green: 166/255, blue: 255/255, opacity: 1.0))
+                        .padding()
+                        .background(Color.white)
+                        .cornerRadius(8)
+                        .foregroundColor(Color(red: 209/255, green: 166/255, blue: 255/255, opacity: 1.0))
+                        .accentColor(Color(red: 209/255, green: 166/255, blue: 255/255, opacity: 1.0))
                     
                     // Sign in
                     
@@ -74,8 +75,11 @@ struct LoginView: View {
                     
                     Spacer()
                     
-                }.padding(.horizontal, 30.0)
+                }
+                .padding(.horizontal, 25)
+                .padding(.top)
         }
+            .navigationBarTitle(Text(""),displayMode: .inline)
     }
     // TODO: Make sure phone number is verified before going to next screen!
     func login() {
