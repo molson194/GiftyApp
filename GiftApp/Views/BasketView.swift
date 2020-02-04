@@ -26,7 +26,8 @@ struct BasketView: View {
     
     func getGifts() {
         let params = ["user": globalVariables.userName] as Dictionary<String, Any>
-        var request = URLRequest(url: URL(string: "https://o2yl8zqwjb.execute-api.us-east-2.amazonaws.com/default/GetGifts")!)
+        var request = URLRequest(url: URL(string: "https://o2yl8zqwjb.execute-api.us-east-2.amazonaws.com/prod/GetGifts")!)
+        // TODO: switch to /dev/GetGifts for dev (see APIGateway stage variables)
         
         request.httpMethod = "POST"
         request.httpBody = try? JSONSerialization.data(withJSONObject: params, options: [])
@@ -46,7 +47,12 @@ struct BasketView: View {
             }
             
             if response != nil{
-                print(response!)
+                if let httpResponse = response as? HTTPURLResponse {
+                    if httpResponse.statusCode != 200 {
+                        // TODO: Display error to user
+                        print("Error response")
+                    }
+                }
             }
             
             if error != nil{
